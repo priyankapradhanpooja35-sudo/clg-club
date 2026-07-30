@@ -20,6 +20,7 @@ export default function StudentDashboard() {
   const [registrations, setRegistrations] = useState<any[]>([]);
   const [memberships, setMemberships] = useState<any[]>([]);
   const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [recommendedEvents, setRecommendedEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,10 +29,12 @@ export default function StudentDashboard() {
       fetch(`/api/registrations`).then(r => r.json()),
       fetch(`/api/members?userId=${user.id}&status=Approved`).then(r => r.json()).catch(() => ({ data: [] })),
       fetch('/api/announcements').then(r => r.json()),
-    ]).then(([regs, mems, anns]) => {
+      fetch('/api/events/recommended').then(r => r.json()),
+    ]).then(([regs, mems, anns, recs]) => {
       setRegistrations(regs.data || []);
       setMemberships(mems.data || []);
       setAnnouncements((anns.data || []).slice(0, 5));
+      setRecommendedEvents(recs.data || []);
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [user]);
@@ -148,6 +151,45 @@ export default function StudentDashboard() {
           )}
         </CardContent>
       </Card>
+
+      {/* Recommended for You */}
+      {recommendedEvents.length > 0 && (
+        <Card className="border-violet-500/20 bg-gradient-to-r from-violet-500/5 via-indigo-500/5 to-transparent">
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <Star className="w-5 h-5 text-amber-500 fill-amber-500" /> Recommended for You
+              </span>
+              <Badge variant="default">AI Smart Match</Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {recommendedEvents.map((ev) => (
+                <div key={ev._id} className="rounded-xl border border-[var(--border)] bg-[var(--card)] p-4 shadow-sm flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-[11px] font-bold text-violet-600 bg-violet-50 dark:bg-violet-950/40 px-2 py-0.5 rounded-md">
+                        {ev.recommendationReason}
+                      </span>
+                      <span className="text-xs text-gray-400">
+                        {new Date(ev.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
+                      </span>
+                    </div>
+                    <h4 className="font-bold text-sm text-[var(--foreground)] mb-1">{ev.title}</h4>
+                    <p className="text-xs text-gray-500 line-clamp-2 mb-3">{ev.description}</p>
+                  </div>
+                  <Link href="/events">
+                    <Button variant="secondary" size="sm" className="w-full text-xs">
+                      View Event Details
+                    </Button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Discover Clubs */}
       <div>

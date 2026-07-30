@@ -1,8 +1,6 @@
 /**
- * BEC Club Hub — Seed Script
- * Run: node seed.js
- *
- * Seeds: 8 clubs, 1 admin, 8 club heads, 20 students, sample events, announcements, memberships
+ * BEC Club Hub — Expanded Demo Seed Script
+ * Run: npm run seed
  */
 
 const mongoose = require('mongoose');
@@ -10,13 +8,86 @@ const bcrypt = require('bcryptjs');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/bec-club-hub';
 
-// ─── Schemas (duplicated from models for standalone script) ──────────────────
-const userSchema = new mongoose.Schema({ name: String, email: String, password: String, role: String, engagementScore: { type: Number, default: 0 }, clubId: mongoose.Schema.Types.ObjectId }, { timestamps: true });
-const clubSchema = new mongoose.Schema({ name: String, slug: String, description: String, mission: String, department: String, theme: String, icon: String, headId: mongoose.Schema.Types.ObjectId }, { timestamps: true });
-const eventSchema = new mongoose.Schema({ title: String, description: String, clubId: mongoose.Schema.Types.ObjectId, date: Date, venue: String, banner: String, isPublished: { type: Boolean, default: true } }, { timestamps: true });
-const announcementSchema = new mongoose.Schema({ title: String, content: String, priority: String, clubId: mongoose.Schema.Types.ObjectId }, { timestamps: true });
-const membershipSchema = new mongoose.Schema({ clubId: mongoose.Schema.Types.ObjectId, userId: mongoose.Schema.Types.ObjectId, status: String, memberRole: String }, { timestamps: true });
-const registrationSchema = new mongoose.Schema({ eventId: mongoose.Schema.Types.ObjectId, userId: mongoose.Schema.Types.ObjectId, qrCodeData: String, checkedIn: Boolean, checkedInAt: Date }, { timestamps: true });
+const userSchema = new mongoose.Schema(
+  {
+    name: String,
+    email: String,
+    password: String,
+    role: String,
+    engagementScore: { type: Number, default: 0 },
+    clubId: mongoose.Schema.Types.ObjectId,
+  },
+  { timestamps: true }
+);
+
+const clubSchema = new mongoose.Schema(
+  {
+    name: String,
+    slug: String,
+    description: String,
+    mission: String,
+    department: String,
+    theme: String,
+    icon: String,
+    headId: mongoose.Schema.Types.ObjectId,
+  },
+  { timestamps: true }
+);
+
+const eventSchema = new mongoose.Schema(
+  {
+    title: String,
+    description: String,
+    clubId: mongoose.Schema.Types.ObjectId,
+    date: Date,
+    venue: String,
+    banner: String,
+    isPublished: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
+
+const announcementSchema = new mongoose.Schema(
+  {
+    title: String,
+    content: String,
+    priority: String,
+    clubId: mongoose.Schema.Types.ObjectId,
+  },
+  { timestamps: true }
+);
+
+const membershipSchema = new mongoose.Schema(
+  {
+    clubId: mongoose.Schema.Types.ObjectId,
+    userId: mongoose.Schema.Types.ObjectId,
+    status: String,
+    memberRole: String,
+  },
+  { timestamps: true }
+);
+
+const registrationSchema = new mongoose.Schema(
+  {
+    eventId: mongoose.Schema.Types.ObjectId,
+    userId: mongoose.Schema.Types.ObjectId,
+    qrCodeData: String,
+    checkedIn: Boolean,
+    checkedInAt: Date,
+  },
+  { timestamps: true }
+);
+
+const taskSchema = new mongoose.Schema(
+  {
+    title: String,
+    description: String,
+    status: String,
+    clubId: mongoose.Schema.Types.ObjectId,
+    assignedTo: mongoose.Schema.Types.ObjectId,
+  },
+  { timestamps: true }
+);
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 const Club = mongoose.models.Club || mongoose.model('Club', clubSchema);
@@ -24,6 +95,7 @@ const Event = mongoose.models.Event || mongoose.model('Event', eventSchema);
 const Announcement = mongoose.models.Announcement || mongoose.model('Announcement', announcementSchema);
 const Membership = mongoose.models.Membership || mongoose.model('Membership', membershipSchema);
 const Registration = mongoose.models.Registration || mongoose.model('Registration', registrationSchema);
+const Task = mongoose.models.Task || mongoose.model('Task', taskSchema);
 
 const CLUBS = [
   { slug: 'microsoft-club', name: 'Microsoft Club', description: 'Empowering students with Microsoft technologies, Azure cloud, and developer tools to build real-world solutions.', mission: 'Bridge academia and industry through Microsoft ecosystem.', department: 'Computer Science', theme: 'theme-microsoft', icon: 'Monitor' },
@@ -37,119 +109,196 @@ const CLUBS = [
 ];
 
 const EVENT_TEMPLATES = [
-  { title: 'Azure Cloud Workshop', description: 'Hands-on session on Azure services, deployment, and cloud architecture for beginners and intermediates.', venue: 'CS Lab 3, Block A', daysFromNow: 3 },
-  { title: 'BEC Music Fest 2024', description: 'Annual cultural extravaganza featuring live performances, group dances, and solo singing competitions.', venue: 'Main Auditorium', daysFromNow: 7 },
-  { title: 'Campus Entrepreneurship Summit', description: 'Guest lectures from startup founders and VC firms, followed by a pitch competition with prizes.', venue: 'Seminar Hall', daysFromNow: 14 },
-  { title: 'Annual Sports Day', description: '12-hour sports extravaganza covering cricket, football, badminton, and indoor games championship.', venue: 'College Ground', daysFromNow: 10 },
-  { title: 'Photography Workshop', description: 'Learn composition, lighting, and editing from professional campus photographers.', venue: 'Media Lab', daysFromNow: 5 },
-  { title: 'Resume & Interview Bootcamp', description: "Mock interviews with industry professionals. Build a stellar resume that gets you through any company's ATS.", venue: 'Placement Cell, Block B', daysFromNow: 2 },
-  { title: 'Tree Plantation Drive', description: 'Community green initiative — plant 500 trees across campus and the neighboring village.', venue: 'Campus Perimeter', daysFromNow: 4 },
-  { title: 'AI & ML Hackathon', description: '24-hour hackathon focused on building ML-powered solutions for real social and technical problems.', venue: 'Innovation Hub', daysFromNow: 21 },
+  { title: 'Azure Cloud & AI Workshop', description: 'Hands-on session on Azure services, OpenAI API deployment, and cloud architecture.', venue: 'CS Lab 3, Block A', daysFromNow: 3, clubIndex: 0 },
+  { title: 'GitHub Copilot Bootcamp', description: 'Master AI-assisted coding and pull request workflows.', venue: 'CS Lab 1', daysFromNow: 8, clubIndex: 0 },
+  { title: 'BEC Music Fest 2024', description: 'Annual cultural extravaganza featuring live performances, group dances, and solo singing.', venue: 'Main Auditorium', daysFromNow: 7, clubIndex: 1 },
+  { title: 'Battle of the Bands', description: 'Inter-college musical competition with cash prizes.', venue: 'Open Air Theatre', daysFromNow: 15, clubIndex: 1 },
+  { title: 'Campus Fest Organizing Meet', description: 'Planning session for BEC Annual Tech Fest 2024.', venue: 'Seminar Hall B', daysFromNow: 2, clubIndex: 2 },
+  { title: 'Annual Sports Tournament', description: '12-hour sports championship covering cricket, football, badminton, and chess.', venue: 'College Ground', daysFromNow: 10, clubIndex: 3 },
+  { title: 'Marathon for Fitness', description: '5K campus run promoting wellness and mental health.', venue: 'Campus Perimeter', daysFromNow: 12, clubIndex: 3 },
+  { title: 'Mobile Photography Masterclass', description: 'Learn composition, lighting, and editing from professional campus photographers.', venue: 'Media Studio', daysFromNow: 5, clubIndex: 4 },
+  { title: 'Campus Drone Videography', description: 'Hands-on aerial photography and video editing session.', venue: 'Main Quadrangle', daysFromNow: 18, clubIndex: 4 },
+  { title: 'Startup Pitch Competition', description: 'Pitch student ideas to VC investors and angel mentors for seed funding.', venue: 'Auditorium Hall 2', daysFromNow: 14, clubIndex: 5 },
+  { title: 'Tree Plantation & Green Drive', description: 'Community green initiative — plant 500 trees across campus and local village.', venue: 'North Campus Grounds', daysFromNow: 4, clubIndex: 6 },
+  { title: 'TCS & Wipro Resume Bootcamp', description: 'Mock interviews with corporate recruiters and ATS resume optimization.', venue: 'Placement Cell, Block B', daysFromNow: 1, clubIndex: 7 },
+  { title: 'Mock Technical Interviews', description: '1-on-1 coding interview practice with alumni working at Amazon & Google.', venue: 'Placement Lab 2', daysFromNow: 9, clubIndex: 7 },
 ];
 
 async function seed() {
   console.log('🌱 Connecting to MongoDB...');
   await mongoose.connect(MONGODB_URI);
 
-  // Clear existing data
   await Promise.all([
-    User.deleteMany({}), Club.deleteMany({}), Event.deleteMany({}),
-    Announcement.deleteMany({}), Membership.deleteMany({}), Registration.deleteMany({})
+    User.deleteMany({}),
+    Club.deleteMany({}),
+    Event.deleteMany({}),
+    Announcement.deleteMany({}),
+    Membership.deleteMany({}),
+    Registration.deleteMany({}),
+    Task.deleteMany({}),
   ]);
   console.log('🧹 Cleared existing data');
 
   const hashPwd = (pwd) => bcrypt.hashSync(pwd, 10);
 
   // Admin
-  const admin = await User.create({ name: 'Admin User', email: 'admin@bec.edu.in', password: hashPwd('admin123'), role: 'Admin', engagementScore: 0 });
-  console.log('👤 Created admin: admin@bec.edu.in / admin123');
+  await User.create({
+    name: 'Admin User',
+    email: 'admin@bec.edu.in',
+    password: hashPwd('admin123'),
+    role: 'Admin',
+    engagementScore: 250,
+  });
+  console.log('👤 Created Admin: admin@bec.edu.in / admin123');
 
   // Club Heads
-  const clubHeadUsers = await Promise.all(CLUBS.map((c, i) =>
-    User.create({ name: `${c.name} Head`, email: `head.${c.slug.replace(/-/g, '')}@bec.edu.in`, password: hashPwd('head123'), role: 'ClubHead', engagementScore: 50 + i * 5 })
-  ));
-  console.log('👥 Created 8 club heads (password: head123)');
+  const clubHeadUsers = await Promise.all(
+    CLUBS.map((c, i) =>
+      User.create({
+        name: `${c.name} Head`,
+        email: `head.${c.slug.replace(/-/g, '')}@bec.edu.in`,
+        password: hashPwd('head123'),
+        role: 'ClubHead',
+        engagementScore: 120 + i * 15,
+      })
+    )
+  );
+  console.log('👥 Created 8 Club Heads');
 
-  // Clubs with their heads
-  const clubs = await Promise.all(CLUBS.map((c, i) =>
-    Club.create({ ...c, headId: clubHeadUsers[i]._id })
-  ));
+  // Clubs
+  const clubs = await Promise.all(
+    CLUBS.map((c, i) =>
+      Club.create({ ...c, headId: clubHeadUsers[i]._id })
+    )
+  );
 
-  // Link club to club head
-  await Promise.all(clubs.map((club, i) =>
-    User.findByIdAndUpdate(clubHeadUsers[i]._id, { clubId: club._id })
-  ));
-  console.log('🏛️ Created 8 clubs');
+  await Promise.all(
+    clubs.map((club, i) =>
+      User.findByIdAndUpdate(clubHeadUsers[i]._id, { clubId: club._id })
+    )
+  );
+  console.log('🏛️ Created 8 Clubs');
 
-  // Students
+  // 30 Students
   const studentNames = [
     'Priya Patel', 'Rahul Sharma', 'Ananya Nair', 'Rohan Das', 'Simran Kaur',
     'Arjun Reddy', 'Sneha Mishra', 'Vikram Singh', 'Pooja Joshi', 'Amit Kumar',
     'Divya Rao', 'Saurabh Gupta', 'Neha Pandey', 'Krishnadev M', 'Meera Iyer',
-    'Ravi Chandra', 'Ankita Verma', 'Suresh Babu', 'Tanvi Shah', 'Ayush Agarwal'
+    'Ravi Chandra', 'Ankita Verma', 'Suresh Babu', 'Tanvi Shah', 'Ayush Agarwal',
+    'Kiran Bedi', 'Deepak Hooda', 'Ishita Dutta', 'Manish Pandey', 'Shreya Ghoshal',
+    'Hardik Pandya', 'Rishabh Pant', 'Shubman Gill', 'Smriti Mandhana', 'Yuzvendra Chahal'
   ];
-  const students = await Promise.all(studentNames.map((name) =>
-    User.create({ name, email: `${name.toLowerCase().replace(/\s+/g, '.')}@bec.edu.in`, password: hashPwd('student123'), role: 'Student', engagementScore: Math.floor(Math.random() * 150) })
-  ));
-  console.log('🎓 Created 20 students (password: student123)');
 
-  // Events (one per club)
+  const students = await Promise.all(
+    studentNames.map((name, idx) =>
+      User.create({
+        name,
+        email: `${name.toLowerCase().replace(/\s+/g, '.')}@bec.edu.in`,
+        password: hashPwd('student123'),
+        role: 'Student',
+        engagementScore: Math.floor(60 + idx * 8 + Math.random() * 20),
+      })
+    )
+  );
+  console.log('🎓 Created 30 Students');
+
+  // Events
   const now = new Date();
-  const events = await Promise.all(EVENT_TEMPLATES.map((ev, i) => {
-    const date = new Date(now);
-    date.setDate(date.getDate() + ev.daysFromNow);
-    return Event.create({ title: ev.title, description: ev.description, clubId: clubs[i]._id, date, venue: ev.venue, isPublished: true });
-  }));
-  console.log('📅 Created 8 events');
+  const events = await Promise.all(
+    EVENT_TEMPLATES.map((ev) => {
+      const date = new Date(now);
+      date.setDate(date.getDate() + ev.daysFromNow);
+      return Event.create({
+        title: ev.title,
+        description: ev.description,
+        clubId: clubs[ev.clubIndex]._id,
+        date,
+        venue: ev.venue,
+        isPublished: true,
+      });
+    })
+  );
+  console.log('📅 Created 13 Events');
 
-  // Memberships (each student joins 2-3 random clubs)
+  // Memberships
   const memberships = [];
   for (const student of students) {
-    const numClubs = 2 + Math.floor(Math.random() * 2);
+    const numClubs = 3 + Math.floor(Math.random() * 2); // 3-4 clubs per student
     const shuffled = [...clubs].sort(() => Math.random() - 0.5).slice(0, numClubs);
     for (const club of shuffled) {
-      memberships.push({ clubId: club._id, userId: student._id, status: 'Approved', memberRole: 'Member' });
+      memberships.push({
+        clubId: club._id,
+        userId: student._id,
+        status: 'Approved',
+        memberRole: 'Member',
+      });
     }
   }
   await Membership.insertMany(memberships);
-  console.log('🔗 Created student memberships');
+  console.log('🔗 Created Student Memberships');
 
-  // Registrations (first 10 students register for first 4 events)
-  const registrations = [];
-  for (let ei = 0; ei < 4; ei++) {
-    for (let si = 0; si < 10; si++) {
+  // Registrations (with predictable demo QR tokens for organizer check-in demo)
+  const registrations = [
+    {
+      eventId: events[0]._id, // Azure Cloud
+      userId: students[0]._id, // Priya Patel
+      qrCodeData: 'bec-reg-demo-1',
+      checkedIn: true,
+      checkedInAt: new Date(),
+    },
+    {
+      eventId: events[0]._id,
+      userId: students[1]._id, // Rahul Sharma
+      qrCodeData: 'bec-reg-demo-2',
+      checkedIn: false,
+    },
+  ];
+
+  for (let ei = 0; ei < events.length; ei++) {
+    for (let si = 2; si < 15; si++) {
       const { randomUUID } = require('crypto');
       registrations.push({
         eventId: events[ei]._id,
         userId: students[si]._id,
         qrCodeData: `bec-reg-${randomUUID()}`,
-        checkedIn: si < 6, // first 6 students "checked in"
-        checkedInAt: si < 6 ? new Date() : undefined
+        checkedIn: Math.random() > 0.4,
+        checkedInAt: new Date(),
       });
     }
   }
   await Registration.insertMany(registrations);
-  console.log('🎟️ Created event registrations');
+  console.log('🎟️ Created Event Registrations');
+
+  // Tasks
+  await Task.insertMany([
+    { title: 'Setup Azure Portal Lab Accounts', description: 'Create sandbox subscriptions for workshop attendees.', status: 'Done', clubId: clubs[0]._id, assignedTo: students[0]._id },
+    { title: 'Print Workshop Badges', description: 'Export attendee list and print QR badges.', status: 'In-progress', clubId: clubs[0]._id, assignedTo: students[1]._id },
+    { title: 'Sound System Check', description: 'Inspect stage speakers and microphones in Main Auditorium.', status: 'To-do', clubId: clubs[1]._id, assignedTo: students[2]._id },
+    { title: 'Design Sports Day Banner', description: 'Create high-res Photoshop banner for college entrance.', status: 'In-progress', clubId: clubs[3]._id, assignedTo: students[4]._id },
+  ]);
+  console.log('📋 Created Club Tasks');
 
   // Announcements
   await Announcement.insertMany([
-    { title: 'Welcome to BEC Club Hub!', content: 'The official platform for all club activities, events, and announcements at BEC is now live. Join your favorite clubs and never miss an event again!', priority: 'General' },
-    { title: '⚠️ Exam Preparation Leave', content: 'All club events and activities are paused from 15–25 August for end-semester examinations. Events will resume from 26 August.', priority: 'Urgent' },
-    { title: 'Microsoft Club Azure Scholarship', content: 'Microsoft Club is offering free Azure certification vouchers to top 10 engaged members. Apply via the club portal before August 10.', priority: 'General', clubId: clubs[0]._id },
-    { title: 'Sports Day Registrations Open', content: 'Register for Annual Sports Day events (cricket, football, badminton) via the Sports Club event page. Teams of 5 for team sports.', priority: 'General', clubId: clubs[3]._id },
-    { title: 'Urgent: Placement Drive Update', content: 'TCS, Infosys, and Wipro campus drives have been rescheduled. New dates will be announced by Placement Club. Check the portal daily.', priority: 'Urgent', clubId: clubs[7]._id },
+    { title: 'Welcome to BEC Club Hub 🚀', content: 'The official platform for all club activities, events, and announcements at BEC is now live.', priority: 'General' },
+    { title: '⚠️ Mid-Term Exam Break Notice', content: 'All club events will be paused during mid-term examination week (Aug 15–22).', priority: 'Urgent' },
+    { title: 'Microsoft Azure Student Credits Available', content: 'Claim $100 Azure credits through the Microsoft Club portal before Aug 10.', priority: 'General', clubId: clubs[0]._id },
+    { title: 'Urgent: Placement Drive Schedule Shift', content: 'Infosys & TCS drives updated. Check Placement Club notices for new slots.', priority: 'Urgent', clubId: clubs[7]._id },
   ]);
-  console.log('📢 Created announcements');
+  console.log('📢 Created Announcements');
 
-  console.log('\n✅ Seed complete! BEC Club Hub is ready for demo.');
-  console.log('\n--- Demo Credentials ---');
-  console.log('Admin:      admin@bec.edu.in     / admin123');
-  console.log('Club Head:  head.microsoftclub@bec.edu.in / head123');
-  console.log('Student:    priya.patel@bec.edu.in / student123');
-  console.log('------------------------\n');
+  console.log('\n✅ Demo Seed Complete!');
+  console.log('--- Demo Accounts ---');
+  console.log('Admin:       admin@bec.edu.in               / admin123');
+  console.log('Club Head:   head.microsoftclub@bec.edu.in  / head123');
+  console.log('Student:     priya.patel@bec.edu.in          / student123');
+  console.log('---------------------\n');
 
   await mongoose.disconnect();
   process.exit(0);
 }
 
-seed().catch((err) => { console.error('Seed failed:', err); process.exit(1); });
+seed().catch((err) => {
+  console.error('Seed failed:', err);
+  process.exit(1);
+});

@@ -18,6 +18,8 @@ const navLinks = [
   { href: '/announcements', label: 'Notices', icon: Megaphone },
 ];
 
+import NotificationCenter from '@/components/NotificationCenter';
+
 export default function Navbar() {
   const { user, logout } = useAuth();
   const pathname = usePathname();
@@ -67,12 +69,35 @@ export default function Navbar() {
                 {label}
               </Link>
             ))}
+            <Link
+              href="/leaderboard"
+              className={cn(
+                'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                pathname === '/leaderboard'
+                  ? 'bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300'
+                  : 'text-gray-600 hover:text-[var(--foreground)] hover:bg-[var(--muted)] dark:text-gray-400'
+              )}
+            >
+              Leaderboard
+            </Link>
+            <Link
+              href="/calendar"
+              className={cn(
+                'px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                pathname === '/calendar'
+                  ? 'bg-violet-50 text-violet-700 dark:bg-violet-950/50 dark:text-violet-300'
+                  : 'text-gray-600 hover:text-[var(--foreground)] hover:bg-[var(--muted)] dark:text-gray-400'
+              )}
+            >
+              Calendar
+            </Link>
           </div>
 
           {/* Right side */}
           <div className="flex items-center gap-2">
             {user ? (
               <>
+                <NotificationCenter />
                 <Link href={getDashboardHref()}>
                   <Button variant="secondary" size="sm" className="hidden sm:flex gap-1.5">
                     <LayoutDashboard className="w-4 h-4" />
