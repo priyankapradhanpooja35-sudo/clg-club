@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
+/* Force dark mode to class-based strategy so system dark preference never activates dark: utilities */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-primary: #1E1B4B;
-  --color-primary-light: #312E81;
-  --color-accent: #7C3AED;
-  --color-accent-light: #8B5CF6;
+  --color-primary: #2563EB;
+  --color-primary-light: #3B82F6;
+  --color-accent: #2563EB;
+  --color-accent-light: #60A5FA;
   --color-background: #F8FAFC;
-  --color-foreground: #0F172A;
+  --color-foreground: #1E293B;
   --color-card: #ffffff;
-  --color-card-foreground: #0F172A;
+  --color-card-foreground: #1E293B;
   --color-border: #E2E8F0;
-  --color-muted: #F1F5F9;
+  --color-muted: #F8FAFC;
   --color-muted-foreground: #64748B;
   
   --font-sans: var(--font-inter);
@@ -18,23 +21,24 @@
 
 :root {
   --background: #F8FAFC;
-  --foreground: #0F172A;
-  --primary: #1E1B4B;
-  --accent: #7C3AED;
+  --foreground: #1E293B;
+  --primary: #2563EB;
+  --accent: #2563EB;
   --card: #ffffff;
   --border: #E2E8F0;
-  --muted: #F1F5F9;
+  --muted: #F8FAFC;
 }
 
+/* Enforce the premium white/blue design system globally, even if the system preferences are set to dark */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #020617;
-    --foreground: #F8FAFC;
-    --primary: #312E81;
-    --accent: #8B5CF6;
-    --card: #0F172A;
-    --border: #1E293B;
-    --muted: #1E293B;
+    --background: #F8FAFC;
+    --foreground: #1E293B;
+    --primary: #2563EB;
+    --accent: #2563EB;
+    --card: #ffffff;
+    --border: #E2E8F0;
+    --muted: #F8FAFC;
   }
 }
 
@@ -53,25 +57,27 @@ body {
 
 /* Glassmorphism utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 @media (prefers-color-scheme: dark) {
   .glass {
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
   }
 }
 
-/* Club specific themes */
-.theme-microsoft { --club-accent: #00A4EF; }
-.theme-music { --club-accent: #EC4899; }
-.theme-events { --club-accent: #F59E0B; }
-.theme-sports { --club-accent: #10B981; }
-.theme-media { --club-accent: #A855F7; }
-.theme-startup { --club-accent: #F97316; }
-.theme-social { --club-accent: #14B8A6; }
-.theme-placement { --club-accent: #1E3A8A; }
+/* Club specific themes - mapped to professional blue-teal-indigo palette */
+.theme-microsoft { --club-accent: #2563EB; }
+.theme-music { --club-accent: #4F46E5; }
+.theme-events { --club-accent: #0D9488; }
+.theme-sports { --club-accent: #0284C7; }
+.theme-media { --club-accent: #3B82F6; }
+.theme-startup { --club-accent: #6366F1; }
+.theme-social { --club-accent: #0F766E; }
+.theme-placement { --club-accent: #1D4ED8; }
