@@ -49,7 +49,7 @@ export const CLUBS_DATA = [
     icon: 'Dumbbell',
     gradient: 'from-green-500 to-emerald-600',
     bg: 'bg-green-500',
-    image: '/images/clubs/sports-health-club.jpg',
+    image: '/images/clubs/sports-health-club.png',
   },
   {
     slug: 'media-club',
