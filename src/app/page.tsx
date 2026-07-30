@@ -4,8 +4,7 @@ import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import {
   Monitor, Music, Star, Dumbbell, Camera, Rocket, Leaf, Briefcase,
-  ArrowRight, ChevronLeft, ChevronRight, Calendar, Users, Zap, Sparkles,
-  MapPin, Clock
+  ArrowRight, Calendar, Users, Zap, Sparkles, MapPin, Clock
 } from 'lucide-react';
 import { CLUBS_DATA } from '@/lib/clubs-data';
 import Navbar from '@/components/Navbar';
@@ -69,7 +68,7 @@ function EventsCarousel({ events }: { events: any[] }) {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -40 }}
         transition={{ duration: 0.4 }}
-        className={`rounded-2xl bg-gradient-to-br ${club.gradient} p-8 min-h-48`}
+        className={`rounded-2xl bg-gradient-to-br ${club.gradient} p-8 min-h-48 shadow-xl`}
       >
         <div className="flex flex-col h-full">
           <div className="flex items-start justify-between mb-4">
@@ -100,27 +99,11 @@ function EventsCarousel({ events }: { events: any[] }) {
             <button
               key={i}
               onClick={() => setIdx(i)}
-              className={`h-2 rounded-full transition-all ${i === idx ? 'w-6 bg-violet-500' : 'w-2 bg-white/20'}`}
+              className={`h-2 rounded-full transition-all ${i === idx ? 'w-6 bg-blue-500' : 'w-2 bg-white/20'}`}
             />
           ))}
         </div>
       )}
-    </div>
-  );
-}
-
-// Campus Pulse widget
-function CampusPulse({ stats }: { stats: any }) {
-  return (
-    <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md px-5 py-3">
-      <div className="relative">
-        <span className="absolute inset-0 rounded-full bg-green-400 animate-ping opacity-40" />
-        <span className="relative flex h-3 w-3 rounded-full bg-green-400" />
-      </div>
-      <p className="text-sm text-white/80">
-        <span className="font-bold text-white">{stats?.totalMembers ?? '...'}</span> students active ·{' '}
-        <span className="font-bold text-white">{stats?.totalEvents ?? '...'}</span> events this session
-      </p>
     </div>
   );
 }
@@ -135,88 +118,154 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--background)]">
+    <div className="min-h-screen bg-slate-50 font-sans">
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1E1B4B] via-[#4C1D95] to-[#1E293B] pt-20 pb-32 px-4">
-        {/* Background blobs */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-60 left-1/4 w-[600px] h-[600px] rounded-full bg-violet-600/15 blur-3xl" />
-          <div className="absolute top-10 right-0 w-96 h-96 rounded-full bg-pink-600/10 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-indigo-600/15 blur-3xl" />
+      {/* HERO SECTION WITH CAMPUS IMAGE BACKGROUND (PIC 3 DESIGN) */}
+      <section className="relative min-h-[580px] lg:min-h-[640px] flex items-center overflow-hidden bg-[#0A1128]">
+        {/* Campus Building Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/bec-building.jpg"
+            alt="Bhubaneswar Engineering College Campus"
+            className="w-full h-full object-cover object-center lg:object-right"
+          />
+          {/* Gradient Overlay: Dark Navy fade on the left, revealing building on the right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A1128] via-[#0A1128]/90 to-transparent lg:via-[#0A1128]/75" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0A1128] via-transparent to-transparent opacity-80" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl">
-          {/* Campus Pulse */}
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="flex justify-center mb-8">
-            <CampusPulse stats={stats} />
-          </motion.div>
-
-          {/* Headline */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-            className="text-center">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.08] tracking-tight">
-              Discover.{' '}
-              <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-indigo-400 bg-clip-text text-transparent">
-                Connect.
-              </span>{' '}
-              Grow.
-            </h1>
-            <p className="mt-6 text-xl text-white/70 max-w-2xl mx-auto leading-relaxed">
-              BEC Club Hub is your one-stop campus platform — join clubs, register for events, 
-              track achievements, and build your legacy at Bhubaneswar Engineering College.
-            </p>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-            <Link href="/clubs">
-              <Button variant="gradient" size="lg" className="gap-2 px-8 text-base">
-                <Sparkles className="w-4 h-4" /> Explore Clubs
-              </Button>
-            </Link>
-            <Link href="/login">
-              <Button variant="secondary" size="lg" className="bg-white/10 border-white/20 text-white hover:bg-white/20 px-8 text-base">
-                Sign In <ArrowRight className="w-4 h-4" />
-              </Button>
-            </Link>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
-            className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {[
-              { label: 'Clubs', to: stats?.totalClubs ?? 8, icon: Users, color: 'from-violet-500 to-purple-600' },
-              { label: 'Members', to: stats?.totalMembers ?? 1200, icon: Users, color: 'from-pink-500 to-rose-600' },
-              { label: 'Events Hosted', to: stats?.totalEvents ?? 48, icon: Calendar, color: 'from-amber-500 to-orange-600' },
-              { label: 'Attendees', to: stats?.totalAttendees ?? 3600, icon: Zap, color: 'from-green-500 to-emerald-600' },
-            ].map(({ label, to, icon: Icon, color }) => (
-              <div key={label} className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-5 text-center">
-                <div className={`inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${color} mb-3`}>
-                  <Icon className="w-5 h-5 text-white" />
-                </div>
-                <p className="text-3xl font-black text-white"><Counter to={to} /></p>
-                <p className="text-sm text-white/60 mt-0.5">{label}</p>
+        <div className="relative z-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <div className="max-w-xl text-left">
+            {/* Campus Pulse Widget */}
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs text-white/90 mb-8"
+            >
+              <div className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
               </div>
-            ))}
-          </motion.div>
+              <span>
+                <strong className="text-white font-bold">{stats?.totalMembers ?? 38}</strong> students active ·{' '}
+                <strong className="text-white font-bold">{stats?.totalEvents ?? 13}</strong> events this session
+              </span>
+            </motion.div>
+
+            {/* Left-Aligned Headline matching Pic 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight">
+                Discover.<br />
+                <span className="text-blue-400 bg-gradient-to-r from-blue-400 to-indigo-300 bg-clip-text text-transparent">
+                  Connect.
+                </span><br />
+                Grow.
+              </h1>
+              <p className="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+                BEC Club Hub is your one-stop campus platform — join clubs, register for events, 
+                track achievements, and build your legacy at Bhubaneswar Engineering College.
+              </p>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35 }}
+              className="flex flex-wrap items-center gap-4 mt-8"
+            >
+              <Link href="/clubs">
+                <button className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm px-6 py-3.5 shadow-lg shadow-blue-600/30 transition-all hover:-translate-y-0.5">
+                  <Sparkles className="w-4 h-4" /> Explore Clubs
+                </button>
+              </Link>
+              <Link href="/login">
+                <button className="flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold text-sm px-6 py-3.5 transition-all">
+                  Sign In <ArrowRight className="w-4 h-4" />
+                </button>
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* CLUBS GRID */}
-      <section className="py-20 px-4 bg-[var(--background)]">
+      {/* STATS ROW (PIC 3 SPEC: LIGHT BG WITH 4 CLEAN WHITE CARDS) */}
+      <section className="bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-violet-100 dark:bg-violet-900/30 px-4 py-1.5 text-sm font-semibold text-violet-700 dark:text-violet-300 mb-4">
-              <Users className="w-3.5 h-3.5" /> 8 Active Clubs
-            </span>
-            <h2 className="text-4xl font-black text-[var(--foreground)] tracking-tight">Find Your Community</h2>
-            <p className="mt-3 text-[var(--muted-foreground,#64748B)] max-w-xl mx-auto">
-              From tech to arts, sports to sustainability — there's a club for every passion at BEC.
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {
+                label: 'Clubs',
+                to: stats?.totalClubs ?? 8,
+                icon: Users,
+                iconBg: 'bg-blue-600 text-white',
+                indicatorBg: 'bg-blue-600',
+              },
+              {
+                label: 'Members',
+                to: stats?.totalMembers ?? 38,
+                icon: Users,
+                iconBg: 'bg-emerald-500 text-white',
+                indicatorBg: 'bg-emerald-500',
+              },
+              {
+                label: 'Events Hosted',
+                to: stats?.totalEvents ?? 13,
+                icon: Calendar,
+                iconBg: 'bg-orange-500 text-white',
+                indicatorBg: 'bg-orange-500',
+              },
+              {
+                label: 'Attendees',
+                to: stats?.totalAttendees ?? 109,
+                icon: Zap,
+                iconBg: 'bg-purple-600 text-white',
+                indicatorBg: 'bg-purple-600',
+              },
+            ].map(({ label, to, icon: Icon, iconBg, indicatorBg }) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="rounded-2xl bg-white border border-slate-200/70 p-6 text-center shadow-sm flex flex-col items-center justify-between"
+              >
+                <div className={`h-12 w-12 rounded-full ${iconBg} flex items-center justify-center mb-3 shadow-md`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+                <p className="text-3xl font-black text-slate-900 leading-tight">
+                  <Counter to={to} />
+                </p>
+                <p className="text-xs font-semibold text-slate-500 mt-1 mb-3">{label}</p>
+                <div className={`h-0.5 w-8 ${indicatorBg} rounded-full`} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CLUBS GRID SECTION (MATCHING PIC 3: POPULAR CLUBS) */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                POPULAR CLUBS
+              </span>
+              <h2 className="text-3xl font-black text-slate-900 tracking-tight">Explore Active Clubs</h2>
+            </div>
+            <Link
+              href="/clubs"
+              className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
+            >
+              View All Clubs <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -228,25 +277,26 @@ export default function LandingPage() {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.07 }}
+                  transition={{ delay: i * 0.05 }}
                 >
                   <Link href={`/clubs/${club.slug}`}>
-                    <div className="group rounded-2xl border border-[var(--border)] bg-[var(--card)] p-6 h-full transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl cursor-pointer overflow-hidden relative">
-                      {/* Gradient top bar */}
+                    <div className="group rounded-2xl border border-slate-200 bg-white p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer relative overflow-hidden flex flex-col justify-between">
+                      {/* Accent top line */}
                       <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${club.gradient}`} />
 
-                      <div className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${club.gradient} mb-4 shadow-lg`}
-                        style={{ boxShadow: `0 8px 25px ${club.accentColor}40` }}>
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
-                      <h3 className="font-bold text-[var(--foreground)] text-base leading-tight mb-2">{club.name}</h3>
-                      <p className="text-sm text-gray-500 line-clamp-3 leading-relaxed">{club.description}</p>
-                      <div className="mt-4 flex items-center gap-1.5 text-xs font-medium text-violet-600 group-hover:gap-3 transition-all">
-                        View Club <ArrowRight className="w-3.5 h-3.5" />
+                      <div>
+                        <div
+                          className={`inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${club.gradient} mb-4 text-white shadow-md`}
+                        >
+                          <Icon className="w-6 h-6" />
+                        </div>
+                        <h3 className="font-bold text-slate-900 text-base leading-tight mb-2">{club.name}</h3>
+                        <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed">{club.description}</p>
                       </div>
 
-                      {/* Hover glow */}
-                      <div className={`absolute inset-0 opacity-0 group-hover:opacity-5 bg-gradient-to-br ${club.gradient} transition-opacity duration-300 pointer-events-none`} />
+                      <div className="mt-5 flex items-center gap-1.5 text-xs font-bold text-blue-600 group-hover:gap-2.5 transition-all">
+                        View Club <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
                     </div>
                   </Link>
                 </motion.div>
@@ -257,15 +307,15 @@ export default function LandingPage() {
       </section>
 
       {/* UPCOMING EVENTS */}
-      <section className="py-20 px-4 bg-gradient-to-br from-[#1E1B4B] to-[#1E293B]">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900 text-white">
         <div className="mx-auto max-w-3xl">
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/80 mb-4">
+          <div className="text-center mb-10">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-blue-300 mb-3">
               <Calendar className="w-3.5 h-3.5" /> Upcoming Events
             </span>
-            <h2 className="text-4xl font-black text-white tracking-tight">Don't Miss Out</h2>
-            <p className="mt-3 text-white/60 max-w-md mx-auto">
-              Discover and register for exciting upcoming events across all clubs.
+            <h2 className="text-3xl font-black text-white tracking-tight">Don't Miss Out</h2>
+            <p className="mt-2 text-sm text-slate-400">
+              Discover and register for exciting upcoming workshops and events.
             </p>
           </div>
           <EventsCarousel events={events} />
@@ -280,31 +330,30 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[var(--card)] border-t border-[var(--border)] py-12 px-4">
+      <footer className="bg-white border-t border-slate-200 py-10 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-700">
-                <span className="text-xs font-black text-white">BEC</span>
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 font-black text-xs text-white">
+                BEC
               </div>
               <div>
-                <p className="font-bold text-[var(--foreground)]">BEC Club Hub</p>
-                <p className="text-xs text-gray-500">Bhubaneswar Engineering College</p>
+                <p className="font-bold text-slate-900 text-sm">BEC Club Hub</p>
+                <p className="text-xs text-slate-500">Bhubaneswar Engineering College</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-6 text-sm text-gray-500">
-              <Link href="/clubs" className="hover:text-violet-600 transition-colors">Clubs</Link>
-              <Link href="/events" className="hover:text-violet-600 transition-colors">Events</Link>
-              <Link href="/announcements" className="hover:text-violet-600 transition-colors">Notices</Link>
-              <Link href="/login" className="hover:text-violet-600 transition-colors">Login</Link>
+            <div className="flex items-center gap-6 text-xs text-slate-500 font-medium">
+              <Link href="/clubs" className="hover:text-blue-600 transition-colors">Clubs</Link>
+              <Link href="/events" className="hover:text-blue-600 transition-colors">Events</Link>
+              <Link href="/announcements" className="hover:text-blue-600 transition-colors">Notices</Link>
+              <Link href="/login" className="hover:text-blue-600 transition-colors">Login</Link>
             </div>
 
-            <p className="text-sm text-gray-500 text-center md:text-right">
-              Built for{' '}
-              <span className="text-violet-600 font-medium">Ayush Technologies Hackathon 2024</span>
+            <p className="text-xs text-slate-500 text-center md:text-right">
+              Built for <span className="text-blue-600 font-bold">Ayush Technologies Hackathon 2024</span>
               <br />
-              <span className="text-xs">© 2024 BEC Club Hub. All rights reserved.</span>
+              <span>© 2024 BEC Club Hub. All rights reserved.</span>
             </p>
           </div>
         </div>

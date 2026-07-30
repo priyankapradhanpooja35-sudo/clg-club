@@ -45,12 +45,17 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-700">
-              <span className="text-xs font-black text-white">BEC</span>
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600 font-black text-xs text-white shadow-sm">
+              BEC
             </div>
-            <span className="text-base font-bold text-[var(--foreground)] hidden sm:block">
-              Club <span className="text-violet-600">Hub</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="text-base font-bold text-[var(--foreground)] leading-none">
+                BEC Club Hub
+              </span>
+              <span className="text-[10px] text-gray-400 font-medium leading-tight mt-0.5">
+                Connect. Engage. Excel.
+              </span>
+            </div>
           </Link>
 
           {/* Desktop nav links */}
