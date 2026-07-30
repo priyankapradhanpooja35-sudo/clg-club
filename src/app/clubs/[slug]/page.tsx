@@ -116,6 +116,20 @@ export default function ClubProfilePage() {
     { name: 'Ipsita Das', role: 'Media Lead', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80' },
   ];
 
+  const scrollToSection = (tabName: string, secId: string) => {
+    setActiveTab(tabName);
+    if (secId === 'sec-overview') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const elem = document.getElementById(secId);
+    if (elem) {
+      const yOffset = -90; // offset for fixed header
+      const y = elem.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-violet-500 selection:text-white pb-20">
       <Navbar />
@@ -128,7 +142,7 @@ export default function ClubProfilePage() {
       </div>
 
       {/* Hero SaaS Card */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
+      <div id="sec-overview" className="max-w-7xl mx-auto px-4 py-4 scroll-mt-24">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800/80 shadow-2xl p-6 md:p-8">
           {/* Neon Glow Accents */}
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
@@ -153,7 +167,7 @@ export default function ClubProfilePage() {
                     <CheckCircle2 className="w-6 h-6 text-blue-400 fill-blue-400/20" />
                   </div>
                   <p className="text-sm font-medium text-slate-400 mt-1 flex items-center gap-1.5">
-                    <span className="inline-block w-2 h-2 rounded-full bg-blue-500" />
+                    <span className="inline-block w-2 h-2 rounded-full bg-blue-500 animate-ping" />
                     🏛️ Department of Computer Science & Engineering, BEC
                   </p>
                 </div>
@@ -240,45 +254,55 @@ export default function ClubProfilePage() {
 
         {/* Left Sidebar Menu */}
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-3 shadow-xl backdrop-blur-md sticky top-24">
-            <p className="text-xs font-bold text-slate-500 uppercase tracking-wider px-3 py-2">Navigation</p>
+          <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-3.5 shadow-2xl backdrop-blur-xl sticky top-24">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800/60 mb-2">
+              <p className="text-[11px] font-extrabold text-blue-400 uppercase tracking-widest flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" /> Navigation Menu
+              </p>
+              <span className="w-2 h-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500" />
+            </div>
+
             <nav className="space-y-1">
               {[
-                { name: 'Overview', icon: Layers },
-                { name: 'About', icon: BookOpen },
-                { name: 'HOD / Mentor', icon: Users },
-                { name: 'Team Members', icon: Users },
-                { name: 'Events', icon: Calendar },
-                { name: 'Gallery', icon: Camera },
-                { name: 'Achievements', icon: Award },
-                { name: 'Resources', icon: ExternalLink },
-                { name: 'FAQs', icon: HelpCircle },
-                { name: 'Announcements', icon: MessageSquare },
-                { name: 'Contact', icon: Mail },
+                { name: 'Overview', id: 'sec-overview', icon: Layers },
+                { name: 'About', id: 'sec-about', icon: BookOpen },
+                { name: 'HOD / Mentor', id: 'sec-hod', icon: Users },
+                { name: 'Team Members', id: 'sec-team', icon: Users },
+                { name: 'Events', id: 'sec-events', icon: Calendar },
+                { name: 'Gallery', id: 'sec-gallery', icon: Camera },
+                { name: 'Achievements', id: 'sec-achievements', icon: Award },
+                { name: 'Resources', id: 'sec-resources', icon: ExternalLink },
+                { name: 'FAQs', id: 'sec-faqs', icon: HelpCircle },
+                { name: 'Announcements', id: 'sec-announcements', icon: MessageSquare },
+                { name: 'Contact', id: 'sec-contact', icon: Mail },
               ].map((tab) => {
                 const IconComp = tab.icon;
                 const isActive = activeTab === tab.name;
                 return (
                   <button
                     key={tab.name}
-                    onClick={() => setActiveTab(tab.name)}
-                    className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${isActive ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30' : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'}`}
+                    onClick={() => scrollToSection(tab.name, tab.id)}
+                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all group ${isActive ? 'bg-gradient-to-r from-blue-600/30 to-violet-600/20 text-white border border-blue-500/40 shadow-md shadow-blue-500/10' : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/70'}`}
                   >
-                    <IconComp className={`w-4 h-4 ${isActive ? 'text-blue-400' : 'text-slate-500'}`} />
-                    {tab.name}
+                    <div className="flex items-center gap-3">
+                      <IconComp className={`w-4 h-4 transition-transform group-hover:scale-110 ${isActive ? 'text-blue-400' : 'text-slate-500 group-hover:text-blue-400'}`} />
+                      <span>{tab.name}</span>
+                    </div>
+                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-sm shadow-blue-400" />}
                   </button>
                 );
               })}
             </nav>
 
             {/* Support Box */}
-            <div className="mt-6 p-4 rounded-xl bg-gradient-to-br from-blue-950/50 to-slate-900 border border-blue-900/30 text-center">
+            <div className="mt-6 p-4 rounded-xl bg-gradient-to-br from-blue-950/60 to-slate-900 border border-blue-900/40 text-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
               <HelpCircle className="w-6 h-6 text-blue-400 mx-auto mb-2" />
               <h4 className="text-xs font-bold text-white">Have Questions?</h4>
               <p className="text-[11px] text-slate-400 mt-1 mb-3">We are here to help you get started.</p>
               <button
-                onClick={() => toast('Contact our student coordinator at anitabehera@gmail.com', 'info')}
-                className="w-full py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-md"
+                onClick={() => scrollToSection('Contact', 'sec-contact')}
+                className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-lg shadow-blue-500/20 active:scale-95"
               >
                 Contact Us
               </button>
@@ -287,13 +311,13 @@ export default function ClubProfilePage() {
         </div>
 
         {/* Main Content Column */}
-        <div className="lg:col-span-9 space-y-8">
+        <div className="lg:col-span-9 space-y-10">
 
           {/* Row 1: HOD Card + About Card */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
             {/* HOD / Faculty Coordinator Card */}
-            <div className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden group hover:border-slate-700 transition-all">
+            <div id="sec-hod" className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl relative overflow-hidden group hover:border-slate-700 transition-all scroll-mt-24">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
 
               <p className="text-xs font-bold text-blue-400 uppercase tracking-wider mb-4 flex items-center gap-1.5">
@@ -359,7 +383,7 @@ export default function ClubProfilePage() {
             </div>
 
             {/* About Microsoft Club Card */}
-            <div className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+            <div id="sec-about" className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between scroll-mt-24">
               <div>
                 <h3 className="text-base font-bold text-white mb-3 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-blue-400" /> About Microsoft Club
@@ -421,7 +445,7 @@ export default function ClubProfilePage() {
             </div>
 
             {/* Upcoming Events Column */}
-            <div className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+            <div id="sec-events" className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between scroll-mt-24">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-bold text-white flex items-center gap-2">
@@ -467,7 +491,7 @@ export default function ClubProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
             {/* Executive Team */}
-            <div className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div id="sec-team" className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-base font-bold text-white flex items-center gap-2">
                   <Users className="w-5 h-5 text-blue-400" /> Executive Team
@@ -489,7 +513,7 @@ export default function ClubProfilePage() {
             </div>
 
             {/* Gallery */}
-            <div className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div id="sec-gallery" className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-base font-bold text-white flex items-center gap-2">
                   <Camera className="w-5 h-5 text-blue-400" /> Moments Gallery
@@ -516,7 +540,7 @@ export default function ClubProfilePage() {
           </div>
 
           {/* Row 4: Achievements, Statistics & Testimonials */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div id="sec-achievements" className="grid grid-cols-1 md:grid-cols-12 gap-6 scroll-mt-24">
 
             {/* Achievements */}
             <div className="md:col-span-4 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3">
@@ -590,7 +614,7 @@ export default function ClubProfilePage() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
             {/* Resources */}
-            <div className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3">
+            <div id="sec-resources" className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3 scroll-mt-24">
               <h3 className="text-base font-bold text-white flex items-center gap-2 mb-3">
                 <ExternalLink className="w-5 h-5 text-blue-400" /> Student Resources
               </h3>
@@ -608,7 +632,7 @@ export default function ClubProfilePage() {
             </div>
 
             {/* FAQs Accordion */}
-            <div className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
+            <div id="sec-faqs" className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
               <h3 className="text-base font-bold text-white flex items-center gap-2 mb-4">
                 <HelpCircle className="w-5 h-5 text-blue-400" /> Frequently Asked Questions
               </h3>
@@ -640,6 +664,65 @@ export default function ClubProfilePage() {
                     </div>
                   );
                 })}
+              </div>
+            </div>
+
+          </div>
+
+          {/* Row 6: Announcements & Contact */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+            
+            {/* Announcements */}
+            <div id="sec-announcements" className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3 scroll-mt-24">
+              <h3 className="text-base font-bold text-white flex items-center gap-2 mb-3">
+                <MessageSquare className="w-5 h-5 text-blue-400" /> Club Announcements
+              </h3>
+              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-blue-400">🚀 Hackathon Registration Open</span>
+                  <span className="text-[10px] text-slate-500">2 hours ago</span>
+                </div>
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  Registrations for "Build with AI Hackathon" are now live! Form your teams of up to 4 members.
+                </p>
+              </div>
+              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-violet-400">📢 Free Azure Pass Voucher</span>
+                  <span className="text-[10px] text-slate-500">Yesterday</span>
+                </div>
+                <p className="text-slate-300 text-[11px] leading-relaxed">
+                  All registered members can claim $100 Azure Cloud credits via Microsoft Learn portal.
+                </p>
+              </div>
+            </div>
+
+            {/* Contact Box */}
+            <div id="sec-contact" className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4 scroll-mt-24">
+              <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <Mail className="w-5 h-5 text-blue-400" /> Contact Microsoft Club
+              </h3>
+              <div className="space-y-2 text-xs text-slate-300">
+                <p className="flex items-center gap-2">
+                  <span className="text-slate-500">Faculty Co-ordinator:</span>
+                  <span className="font-semibold text-white">Mrs. Anita Behera</span>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-slate-500">Official Email:</span>
+                  <a href="mailto:anitabehera@gmail.com" className="text-blue-400 hover:underline">anitabehera@gmail.com</a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="text-slate-500">Office Location:</span>
+                  <span className="text-slate-300">Room 302, CSE Dept, BEC Campus</span>
+                </p>
+              </div>
+              <div className="pt-2">
+                <button
+                  onClick={() => toast('Message sent to Microsoft Club team!', 'success')}
+                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white font-bold text-xs shadow-md transition-all active:scale-95"
+                >
+                  Send Direct Message →
+                </button>
               </div>
             </div>
 
