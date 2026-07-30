@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Event from '@/models/Event';
+import Club from '@/models/Club';
 import { getTokenFromRequest, verifyToken, successResponse, errorResponse } from '@/lib/auth';
 
 // GET /api/events — list events (with optional ?clubId= and ?upcoming=true filters)

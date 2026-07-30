@@ -1,4 +1,11 @@
 import mongoose from 'mongoose';
+import '@/models/User';
+import '@/models/Club';
+import '@/models/Event';
+import '@/models/Membership';
+import '@/models/Registration';
+import '@/models/Announcement';
+import '@/models/Task';
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/bec-club-hub';
 

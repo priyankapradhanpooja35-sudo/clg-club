@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Event from '@/models/Event';
+import Club from '@/models/Club';
 import { getTokenFromRequest, verifyToken, successResponse, errorResponse } from '@/lib/auth';
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
