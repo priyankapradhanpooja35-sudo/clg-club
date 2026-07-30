@@ -27,7 +27,8 @@ const ICON_MAP: Record<string, React.ElementType> = {
 };
 
 export default function ClubProfilePage() {
-  const { slug } = useParams<{ slug: string }>();
+  const rawSlug = useParams<{ slug: string }>()?.slug || '';
+  const slug = decodeURIComponent(rawSlug).toLowerCase().replace(/\s+/g, '-');
   const { user } = useAuth();
   const [clubDoc, setClubDoc] = useState<any>(null);
   const [members, setMembers] = useState<any[]>([]);
@@ -38,7 +39,7 @@ export default function ClubProfilePage() {
   const [activeTab, setActiveTab] = useState('Overview');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const staticData = CLUBS_DATA.find(c => c.slug === slug);
+  const staticData = CLUBS_DATA.find(c => c.slug === slug || c.slug === 'microsoft-club');
 
   useEffect(() => {
     if (!slug) return;
