@@ -141,7 +141,7 @@ export default function ClubProfilePage() {
         <span className="text-slate-200 font-semibold">{staticData.name}</span>
       </div>
 
-      {/* Hero SaaS Card */}
+      {/* Hero SaaS Header */}
       <div id="sec-overview" className="max-w-7xl mx-auto px-4 py-4 scroll-mt-24">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800/80 shadow-2xl p-6 md:p-8">
           {/* Neon Glow Accents */}
@@ -225,12 +225,12 @@ export default function ClubProfilePage() {
               </div>
             </div>
 
-            {/* Right Laptop Illustration Banner */}
+            {/* Right Graphic Banner */}
             <div className="lg:col-span-5 relative flex justify-center">
               <div className="relative w-full max-w-md aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-900/60 group">
                 <img
                   src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80"
-                  alt="Microsoft Azure Cloud Laptop Setup"
+                  alt="Microsoft Azure Cloud Setup"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
@@ -249,32 +249,27 @@ export default function ClubProfilePage() {
         </div>
       </div>
 
-      {/* Body Content Grid */}
+      {/* Main Body Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-        {/* Left Sidebar Menu */}
+        {/* Left Navigation Sidebar */}
         <div className="lg:col-span-3 space-y-6">
-          <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-3.5 shadow-2xl backdrop-blur-xl sticky top-24">
-            <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800/60 mb-2">
+          <div className="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 shadow-2xl backdrop-blur-xl sticky top-24">
+            <div className="flex items-center justify-between px-2 py-1.5 border-b border-slate-800/60 mb-3">
               <p className="text-[11px] font-extrabold text-blue-400 uppercase tracking-widest flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Navigation Menu
+                <Sparkles className="w-3.5 h-3.5" /> Navigation
               </p>
               <span className="w-2 h-2 rounded-full bg-blue-500 shadow-sm shadow-blue-500" />
             </div>
 
-            <nav className="space-y-1">
+            <nav className="space-y-1.5">
               {[
                 { name: 'Overview', id: 'sec-overview', icon: Layers },
-                { name: 'About', id: 'sec-about', icon: BookOpen },
-                { name: 'HOD / Mentor', id: 'sec-hod', icon: Users },
-                { name: 'Team Members', id: 'sec-team', icon: Users },
-                { name: 'Events', id: 'sec-events', icon: Calendar },
-                { name: 'Gallery', id: 'sec-gallery', icon: Camera },
-                { name: 'Achievements', id: 'sec-achievements', icon: Award },
-                { name: 'Resources', id: 'sec-resources', icon: ExternalLink },
+                { name: 'About Club', id: 'sec-about', icon: BookOpen },
+                { name: 'HOD / Faculty Coordinator', id: 'sec-hod', icon: Users },
+                { name: 'Upcoming Events', id: 'sec-events', icon: Calendar },
                 { name: 'FAQs', id: 'sec-faqs', icon: HelpCircle },
-                { name: 'Announcements', id: 'sec-announcements', icon: MessageSquare },
-                { name: 'Contact', id: 'sec-contact', icon: Mail },
+                { name: 'Contact Us', id: 'sec-contact', icon: Mail },
               ].map((tab) => {
                 const IconComp = tab.icon;
                 const isActive = activeTab === tab.name;
@@ -298,22 +293,22 @@ export default function ClubProfilePage() {
             <div className="mt-6 p-4 rounded-xl bg-gradient-to-br from-blue-950/60 to-slate-900 border border-blue-900/40 text-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-20 h-20 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
               <HelpCircle className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-              <h4 className="text-xs font-bold text-white">Have Questions?</h4>
-              <p className="text-[11px] text-slate-400 mt-1 mb-3">We are here to help you get started.</p>
+              <h4 className="text-xs font-bold text-white">Need Assistance?</h4>
+              <p className="text-[11px] text-slate-400 mt-1 mb-3">Our faculty coordinator is here to help.</p>
               <button
-                onClick={() => scrollToSection('Contact', 'sec-contact')}
+                onClick={() => scrollToSection('Contact Us', 'sec-contact')}
                 className="w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-all shadow-lg shadow-blue-500/20 active:scale-95"
               >
-                Contact Us
+                Get In Touch
               </button>
             </div>
           </div>
         </div>
 
-        {/* Main Content Column */}
-        <div className="lg:col-span-9 space-y-10">
+        {/* Main Content Area */}
+        <div className="lg:col-span-9 space-y-8">
 
-          {/* Row 1: HOD Card + About Card */}
+          {/* Section 1: HOD / Faculty Coordinator & About Microsoft Club */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
             {/* HOD / Faculty Coordinator Card */}
@@ -345,7 +340,7 @@ export default function ClubProfilePage() {
                   <p className="text-[11px] text-slate-500">Bhubaneswar Engineering College</p>
                 </div>
 
-                {/* HOD Quick Details Pill */}
+                {/* HOD Quick Details */}
                 <div className="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-left space-y-1.5 text-xs text-slate-300">
                   <div className="flex justify-between items-center">
                     <span className="text-slate-500">Qualification:</span>
@@ -361,7 +356,7 @@ export default function ClubProfilePage() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-slate-500">Courses:</span>
-                    <span className="font-semibold text-violet-400 truncate max-w-[140px]" title="DS, ML, DE, C, Java, Python, IoT, SE">DS, ML, Python, Java, IoT</span>
+                    <span className="font-semibold text-violet-400 truncate max-w-[140px]" title="DS, ML, Python, Java, IoT">DS, ML, Python, Java, IoT</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-slate-500">Patents:</span>
@@ -369,13 +364,12 @@ export default function ClubProfilePage() {
                   </div>
                 </div>
 
-                {/* Contact Email & Socials */}
+                {/* Email Contact */}
                 <div className="w-full pt-1 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
                   <a href="mailto:anitabehera@gmail.com" className="flex items-center gap-1 text-blue-400 hover:underline text-[11px]">
                     <Mail className="w-3.5 h-3.5" /> anitabehera@gmail.com
                   </a>
                   <div className="flex items-center gap-2">
-                    <span className="p-1.5 bg-slate-800 rounded-lg text-slate-300 hover:text-white cursor-pointer"><Globe className="w-3.5 h-3.5" /></span>
                     <span className="p-1.5 bg-slate-800 rounded-lg text-slate-300 hover:text-white cursor-pointer"><Globe className="w-3.5 h-3.5" /></span>
                   </div>
                 </div>
@@ -389,10 +383,10 @@ export default function ClubProfilePage() {
                   <Sparkles className="w-5 h-5 text-blue-400" /> About Microsoft Club
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                  The Microsoft Club is a student-driven community at Bhubaneswar Engineering College that explores the world of Microsoft technologies including Azure Cloud, Artificial Intelligence, Web Development, GitHub, and .NET.
+                  The Microsoft Club is a student-driven technical community at Bhubaneswar Engineering College. We foster a collaborative environment where students learn cutting-edge technology, build real-world software, and gain hands-on experience with Microsoft Cloud and AI ecosystems.
                 </p>
                 <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-6">
-                  We organize hands-on workshops, hackathons, certification drives, industry expert talks, and collaborative projects to help BEC students learn, build, and grow into industry-ready engineers.
+                  Through expert workshops, hackathons, and certification tracks, Microsoft Club equips students to transition smoothly into industry-ready software engineers and innovators.
                 </p>
               </div>
 
@@ -417,322 +411,149 @@ export default function ClubProfilePage() {
             </div>
           </div>
 
-          {/* Row 2: What You'll Explore & Upcoming Events */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-
-            {/* What You'll Explore Grid */}
-            <div className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
-              <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
-                <Code2 className="w-5 h-5 text-blue-400" /> What You'll Explore
-              </h3>
-
-              <div className="grid grid-cols-2 gap-3">
-                {techExplore.map((item) => {
-                  const TIcon = item.icon;
-                  return (
-                    <div key={item.name} className="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 hover:border-blue-500/40 transition-all group flex items-start gap-3">
-                      <div className={`p-2 rounded-lg bg-gradient-to-br ${item.color} text-white shrink-0 group-hover:scale-110 transition-transform`}>
-                        <TIcon className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-bold text-white">{item.name}</h4>
-                        <p className="text-[10px] text-slate-400">{item.label}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Upcoming Events Column */}
-            <div id="sec-events" className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between scroll-mt-24">
+          {/* Section 2: Upcoming Events */}
+          <div id="sec-events" className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
+            <div className="flex items-center justify-between mb-6">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-base font-bold text-white flex items-center gap-2">
-                    <Calendar className="w-5 h-5 text-violet-400" /> Upcoming Events
-                  </h3>
-                  <Link href="/events" className="text-xs font-semibold text-blue-400 hover:underline flex items-center gap-1">
-                    View All <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-
-                <div className="space-y-3">
-                  {[
-                    { title: 'Azure Fundamentals Workshop', date: '15 AUG', venue: 'Seminar Hall, BEC', time: '10:00 AM - 01:00 PM' },
-                    { title: 'Build with AI Hackathon', date: '28 AUG', venue: 'Computer Lab, CSE', time: '09:00 AM - 09:00 PM' },
-                    { title: 'Microsoft Learn Challenge', date: '05 SEP', venue: 'Online Event', time: '07:00 PM - 08:30 PM' },
-                  ].map((ev) => (
-                    <div key={ev.title} className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between gap-3 hover:border-slate-700 transition-all">
-                      <div className="flex items-center gap-3">
-                        <div className="p-2.5 rounded-xl bg-violet-600/20 border border-violet-500/30 text-center shrink-0 w-12">
-                          <p className="text-xs font-black text-violet-400 leading-none">{ev.date.split(' ')[0]}</p>
-                          <p className="text-[9px] font-bold text-slate-400">{ev.date.split(' ')[1]}</p>
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-bold text-white">{ev.title}</h4>
-                          <p className="text-[10px] text-slate-400">{ev.venue} • {ev.time}</p>
-                        </div>
-                      </div>
-                      <Button
-                        size="sm"
-                        onClick={() => toast(`Registered for ${ev.title}!`, 'success')}
-                        className="bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold px-3 py-1 rounded-lg shrink-0"
-                      >
-                        Register
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Row 3: Executive Team & Gallery */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-
-            {/* Executive Team */}
-            <div id="sec-team" className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Users className="w-5 h-5 text-blue-400" /> Executive Team
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-violet-400" /> Upcoming Events & Workshops
                 </h3>
-                <span className="text-xs text-slate-400 font-medium">5 Core Leads</span>
+                <p className="text-xs text-slate-400 mt-1">Participate in our upcoming sessions and sharpen your skills</p>
               </div>
+              <Link href="/events" className="text-xs font-bold text-blue-400 hover:underline flex items-center gap-1">
+                Explore All Events <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {executiveTeam.map((mem) => (
-                  <div key={mem.name} className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center space-y-2 hover:border-blue-500/30 transition-all">
-                    <img src={mem.avatar} alt={mem.name} className="w-12 h-12 rounded-full object-cover mx-auto ring-2 ring-blue-500/30" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                { title: 'Azure Fundamentals Workshop', date: '15 AUG', venue: 'Seminar Hall, BEC', time: '10:00 AM - 01:00 PM', desc: 'Learn core cloud concepts and claim $100 Azure credits.' },
+                { title: 'Build with AI Hackathon', date: '28 AUG', venue: 'Computer Lab, CSE', time: '09:00 AM - 09:00 PM', desc: '24-hour coding challenge to build AI solutions.' },
+                { title: 'Microsoft Learn Challenge', date: '05 SEP', venue: 'Online Event', time: '07:00 PM - 08:30 PM', desc: 'Complete interactive learning modules for global badges.' },
+              ].map((ev) => (
+                <div key={ev.title} className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between hover:border-blue-500/40 transition-all group">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="px-3 py-1 rounded-lg bg-violet-600/20 border border-violet-500/30 text-center">
+                        <span className="text-xs font-black text-violet-400">{ev.date}</span>
+                      </div>
+                      <span className="text-[10px] text-slate-500">{ev.time}</span>
+                    </div>
                     <div>
-                      <h4 className="text-xs font-bold text-white truncate">{mem.name}</h4>
-                      <p className="text-[10px] text-blue-400 font-semibold truncate">{mem.role}</p>
+                      <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">{ev.title}</h4>
+                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">{ev.desc}</p>
                     </div>
+                    <p className="text-[11px] text-slate-500 flex items-center gap-1">
+                      <MapPin className="w-3 h-3 text-slate-400" /> {ev.venue}
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Gallery */}
-            <div id="sec-gallery" className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Camera className="w-5 h-5 text-blue-400" /> Moments Gallery
-                </h3>
-                <span className="text-xs text-blue-400 hover:underline cursor-pointer">View All ↗</span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { title: 'Azure Workshop', url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&auto=format&fit=crop&q=80' },
-                  { title: 'Hackathon 2K24', url: '/images/moments-students-outdoor.jpg' },
-                  { title: 'Certification Drive', url: '/images/moments-conference-group.jpg' },
-                  { title: 'Annual Tech Fest', url: '/images/moments-cheering-celebration.jpg' },
-                ].map((g) => (
-                  <div key={g.title} className="group relative h-28 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 cursor-pointer">
-                    <img src={g.url} alt={g.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                      <p className="text-[10px] font-bold text-white truncate">{g.title}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Row 4: Achievements, Statistics & Testimonials */}
-          <div id="sec-achievements" className="grid grid-cols-1 md:grid-cols-12 gap-6 scroll-mt-24">
-
-            {/* Achievements */}
-            <div className="md:col-span-4 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3">
-              <h3 className="text-base font-bold text-white flex items-center gap-2 mb-2">
-                <Award className="w-5 h-5 text-amber-400" /> Achievements
-              </h3>
-              {[
-                'Winner, Smart India Hackathon 2023',
-                'Microsoft Learn Student Ambassador',
-                'Best Technical Club Award 2023',
-                'Organized 20+ Successful Events'
-              ].map((ach, i) => (
-                <div key={i} className="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center gap-2.5 text-xs font-semibold text-slate-200">
-                  <span className="text-amber-400">🏆</span>
-                  <span>{ach}</span>
+                  <Button
+                    size="sm"
+                    onClick={() => toast(`Registered for ${ev.title}!`, 'success')}
+                    className="w-full mt-4 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-2 rounded-xl transition-all shadow-md"
+                  >
+                    Register Now
+                  </Button>
                 </div>
               ))}
             </div>
+          </div>
 
-            {/* Club Statistics */}
-            <div className="md:col-span-4 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl">
-              <h3 className="text-base font-bold text-white flex items-center gap-2 mb-4">
-                <BarChart3 className="w-5 h-5 text-blue-400" /> Club Statistics
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                  <p className="text-2xl font-black text-blue-400">420+</p>
-                  <p className="text-[10px] font-bold text-slate-400">Members</p>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                  <p className="text-2xl font-black text-violet-400">28</p>
-                  <p className="text-[10px] font-bold text-slate-400">Events</p>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                  <p className="text-2xl font-black text-emerald-400">65+</p>
-                  <p className="text-[10px] font-bold text-slate-400">Projects Done</p>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
-                  <p className="text-2xl font-black text-amber-400">98%</p>
-                  <p className="text-[10px] font-bold text-slate-400">Positive Feedback</p>
-                </div>
-              </div>
-            </div>
+          {/* Section 3: Frequently Asked Questions */}
+          <div id="sec-faqs" className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2 mb-2">
+              <HelpCircle className="w-5 h-5 text-blue-400" /> Frequently Asked Questions
+            </h3>
+            <p className="text-xs text-slate-400 mb-6">Got questions? Find clear answers right here.</p>
 
-            {/* Testimonials */}
-            <div className="md:col-span-4 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2 mb-3">
-                  <MessageSquare className="w-5 h-5 text-blue-400" /> Member Testimonials
-                </h3>
-                <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-300 italic leading-relaxed mb-3">
-                  "Being part of Microsoft Club helped me improve my coding skills and gave me real-world Azure exposure!"
-                  <div className="mt-2 not-italic font-bold text-white flex items-center justify-between text-[11px]">
-                    <span>Riya Mohanty (3rd Yr, CSE)</span>
-                    <span className="text-amber-400">⭐⭐⭐⭐⭐</span>
+            <div className="space-y-3">
+              {faqs.map((faq, index) => {
+                const isOpen = openFaq === index;
+                return (
+                  <div key={faq.q} className="rounded-xl bg-slate-950/80 border border-slate-800 overflow-hidden transition-colors hover:border-slate-700">
+                    <button
+                      onClick={() => setOpenFaq(isOpen ? null : index)}
+                      className="w-full p-4 text-left flex items-center justify-between text-sm font-bold text-slate-200 hover:text-white transition-colors"
+                    >
+                      <span>{faq.q}</span>
+                      <ChevronDown className={`w-4 h-4 text-blue-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="px-4 pb-4 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3"
+                        >
+                          {faq.a}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
-              </div>
-              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-300 italic leading-relaxed">
-                "The hackathons organized by Microsoft Club are top notch and helped us win SIH!"
-                <div className="mt-2 not-italic font-bold text-white flex items-center justify-between text-[11px]">
-                  <span>Siddhant Das (2nd Yr, CSE)</span>
-                  <span className="text-amber-400">⭐⭐⭐⭐⭐</span>
-                </div>
-              </div>
+                );
+              })}
             </div>
-
           </div>
 
-          {/* Row 5: Resources & FAQs */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-
-            {/* Resources */}
-            <div id="sec-resources" className="md:col-span-5 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3 scroll-mt-24">
-              <h3 className="text-base font-bold text-white flex items-center gap-2 mb-3">
-                <ExternalLink className="w-5 h-5 text-blue-400" /> Student Resources
-              </h3>
-              {[
-                { title: 'Microsoft Learn Platform', link: 'Explore now ↗' },
-                { title: 'Azure for Students ($100 Credit)', link: 'Get started ↗' },
-                { title: 'GitHub Student Developer Pack', link: 'View benefits ↗' },
-                { title: 'Club Study Drive & Notes', link: 'Access now ↗' },
-              ].map((res) => (
-                <div key={res.title} className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between text-xs font-bold text-white hover:border-blue-500/40 transition-all cursor-pointer">
-                  <span>{res.title}</span>
-                  <span className="text-blue-400 text-[11px] font-semibold">{res.link}</span>
+          {/* Section 4: Contact Us */}
+          <div id="sec-contact" className="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              <div className="space-y-3">
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Mail className="w-5 h-5 text-blue-400" /> Contact Microsoft Club
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Have questions about upcoming workshops, membership, or collaborations? Reach out directly to our department coordinator.
+                </p>
+                <div className="space-y-2 text-xs text-slate-300 pt-2">
+                  <p className="flex items-center gap-2">
+                    <span className="text-slate-500 font-medium">Faculty Co-ordinator:</span>
+                    <span className="font-semibold text-white">Mrs. Anita Behera</span>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-slate-500 font-medium">Official Email:</span>
+                    <a href="mailto:anitabehera@gmail.com" className="text-blue-400 hover:underline font-semibold">anitabehera@gmail.com</a>
+                  </p>
+                  <p className="flex items-center gap-2">
+                    <span className="text-slate-500 font-medium">Department Office:</span>
+                    <span className="text-slate-300">Room 302, CSE Dept, BEC Campus</span>
+                  </p>
                 </div>
-              ))}
-            </div>
-
-            {/* FAQs Accordion */}
-            <div id="sec-faqs" className="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl scroll-mt-24">
-              <h3 className="text-base font-bold text-white flex items-center gap-2 mb-4">
-                <HelpCircle className="w-5 h-5 text-blue-400" /> Frequently Asked Questions
-              </h3>
-
-              <div className="space-y-2">
-                {faqs.map((faq, index) => {
-                  const isOpen = openFaq === index;
-                  return (
-                    <div key={faq.q} className="rounded-xl bg-slate-950/80 border border-slate-800 overflow-hidden">
-                      <button
-                        onClick={() => setOpenFaq(isOpen ? null : index)}
-                        className="w-full p-3 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white transition-colors"
-                      >
-                        <span>{faq.q}</span>
-                        <ChevronDown className={`w-4 h-4 text-blue-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                      </button>
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="px-3 pb-3 text-[11px] text-slate-400 leading-relaxed border-t border-slate-800/60 pt-2"
-                          >
-                            {faq.a}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                })}
               </div>
-            </div>
 
-          </div>
-
-          {/* Row 6: Announcements & Contact */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-            
-            {/* Announcements */}
-            <div id="sec-announcements" className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3 scroll-mt-24">
-              <h3 className="text-base font-bold text-white flex items-center gap-2 mb-3">
-                <MessageSquare className="w-5 h-5 text-blue-400" /> Club Announcements
-              </h3>
-              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-blue-400">🚀 Hackathon Registration Open</span>
-                  <span className="text-[10px] text-slate-500">2 hours ago</span>
-                </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  Registrations for "Build with AI Hackathon" are now live! Form your teams of up to 4 members.
-                </p>
-              </div>
-              <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="font-bold text-violet-400">📢 Free Azure Pass Voucher</span>
-                  <span className="text-[10px] text-slate-500">Yesterday</span>
-                </div>
-                <p className="text-slate-300 text-[11px] leading-relaxed">
-                  All registered members can claim $100 Azure Cloud credits via Microsoft Learn portal.
-                </p>
-              </div>
-            </div>
-
-            {/* Contact Box */}
-            <div id="sec-contact" className="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4 scroll-mt-24">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Mail className="w-5 h-5 text-blue-400" /> Contact Microsoft Club
-              </h3>
-              <div className="space-y-2 text-xs text-slate-300">
-                <p className="flex items-center gap-2">
-                  <span className="text-slate-500">Faculty Co-ordinator:</span>
-                  <span className="font-semibold text-white">Mrs. Anita Behera</span>
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="text-slate-500">Official Email:</span>
-                  <a href="mailto:anitabehera@gmail.com" className="text-blue-400 hover:underline">anitabehera@gmail.com</a>
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="text-slate-500">Office Location:</span>
-                  <span className="text-slate-300">Room 302, CSE Dept, BEC Campus</span>
-                </p>
-              </div>
-              <div className="pt-2">
+              <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
+                <h4 className="text-xs font-bold text-white">Send Direct Inquiry</h4>
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                />
+                <textarea
+                  rows={2}
+                  placeholder="Your Message..."
+                  className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                />
                 <button
                   onClick={() => toast('Message sent to Microsoft Club team!', 'success')}
                   className="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 text-white font-bold text-xs shadow-md transition-all active:scale-95"
                 >
-                  Send Direct Message →
+                  Send Message
                 </button>
               </div>
             </div>
-
           </div>
 
           {/* Bottom CTA Banner */}
           <div className="rounded-3xl bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-700 p-8 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="text-2xl font-black text-white">Ready to innovate and make an impact?</h3>
-              <p className="text-sm text-blue-100 mt-1">Join Microsoft Club today and start your amazing developer journey with us.</p>
+              <p className="text-sm text-blue-100 mt-1">Join Microsoft Club today and start your developer journey with us.</p>
             </div>
             <Button
               onClick={handleJoin}
