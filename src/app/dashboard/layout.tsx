@@ -33,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (!user) return null;
 
-  const roleKey = user.role === 'Admin' ? 'admin' : user.role === 'ClubHead' ? 'club-head' : 'student';
+  const roleKey = user.role === 'Admin' ? 'admin' : user.role === 'ClubHead' ? 'club-head' : user.role === 'Faculty' ? 'faculty' : 'student';
 
   const handleGlobalSearch = (e: React.FormEvent) => {
     e.preventDefault();

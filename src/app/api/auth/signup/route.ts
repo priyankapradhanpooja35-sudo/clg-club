@@ -28,7 +28,8 @@ export async function POST(req: NextRequest) {
       return errorResponse('An account with this email already exists', 409);
     }
 
-    // Map client selection labels to model values
+    // Restrict allowed signup roles to student, faculty, guest, and club coordinator (ClubHead)
+    // Map client selection labels to model values: 'Student', 'ClubHead', 'Faculty', 'Guest'
     const allowedRoles = ['Student', 'ClubHead', 'Faculty', 'Guest'];
     const userRole = allowedRoles.includes(role) ? role : 'Student';
 
@@ -53,7 +54,7 @@ export async function POST(req: NextRequest) {
     );
     return setAuthCookie(res, token);
   } catch (err: unknown) {
-    console.error('Register error:', err);
+    console.error('Signup error:', err);
     return errorResponse('Internal server error', 500);
   }
 }

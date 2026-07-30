@@ -240,6 +240,14 @@ export default function Navbar() {
                       <span className="hidden sm:block text-sm font-semibold text-[#1E293B] dark:text-slate-200">
                         {user.name.split(' ')[0]}
                       </span>
+                      <span className={cn(
+                        'hidden md:inline-block px-2 py-0.5 rounded-full text-[9px] font-bold text-white',
+                        user.role === 'Admin' ? 'bg-[#EF4444]' :
+                        user.role === 'ClubHead' ? 'bg-[#10B981]' :
+                        user.role === 'Faculty' ? 'bg-[#8B5CF6]' : 'bg-[#64748B]'
+                      )}>
+                        {user.role}
+                      </span>
                       <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden sm:block" />
                     </button>
 
@@ -266,8 +274,41 @@ export default function Navbar() {
                             onClick={() => setProfileOpen(false)}
                           >
                             <LayoutDashboard className="w-4 h-4 text-[#2563EB]" />
-                            Dashboard
+                            Dashboard Overview
                           </Link>
+
+                          {/* Conditional Admin, ClubHead, and Faculty Action Links */}
+                          {user.role === 'Admin' && (
+                            <Link
+                              href="/dashboard/admin"
+                              className="flex items-center gap-2.5 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200 dark:hover:bg-slate-800"
+                              onClick={() => setProfileOpen(false)}
+                            >
+                              <ShieldCheck className="w-4 h-4" />
+                              Admin Panel
+                            </Link>
+                          )}
+                          {user.role === 'ClubHead' && (
+                            <Link
+                              href="/dashboard/club-head"
+                              className="flex items-center gap-2.5 px-4 py-2 text-sm font-medium text-emerald-600 hover:bg-emerald-50 transition-all duration-200 dark:hover:bg-slate-800"
+                              onClick={() => setProfileOpen(false)}
+                            >
+                              <Users className="w-4 h-4" />
+                              Manage My Club
+                            </Link>
+                          )}
+                          {user.role === 'Faculty' && (
+                            <Link
+                              href="/dashboard/faculty"
+                              className="flex items-center gap-2.5 px-4 py-2 text-sm font-medium text-purple-600 hover:bg-purple-50 transition-all duration-200 dark:hover:bg-slate-800"
+                              onClick={() => setProfileOpen(false)}
+                            >
+                              <Award className="w-4 h-4" />
+                              Faculty Portal
+                            </Link>
+                          )}
+
                           <button
                             onClick={handleLogout}
                             className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 transition-all duration-200 dark:hover:bg-red-950/20"

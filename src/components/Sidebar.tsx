@@ -40,9 +40,14 @@ const studentLinks: SidebarLink[] = [
   { href: '/dashboard/student/tickets', label: 'QR Tickets', icon: Ticket },
 ];
 
+const facultyLinks: SidebarLink[] = [
+  { href: '/dashboard/faculty', label: 'Faculty Portal', icon: LayoutDashboard },
+];
+
 const linkSets: Record<string, SidebarLink[]> = {
   admin: adminLinks,
   'club-head': clubHeadLinks,
+  faculty: facultyLinks,
   student: studentLinks,
 };
 

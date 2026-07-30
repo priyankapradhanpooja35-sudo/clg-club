@@ -10,6 +10,7 @@ export const CLUBS_DATA = [
     icon: 'Monitor',
     gradient: 'from-blue-500 to-cyan-600',
     bg: 'bg-blue-500',
+    image: '/images/clubs/microsoft-club.jpg',
   },
   {
     slug: 'music-dance-club',
@@ -22,6 +23,7 @@ export const CLUBS_DATA = [
     icon: 'Music',
     gradient: 'from-pink-500 to-rose-600',
     bg: 'bg-pink-500',
+    image: '/images/clubs/music-dance-club.jpg',
   },
   {
     slug: 'event-management-club',
@@ -34,6 +36,7 @@ export const CLUBS_DATA = [
     icon: 'Star',
     gradient: 'from-amber-500 to-orange-600',
     bg: 'bg-amber-500',
+    image: '/images/clubs/event-management-club.jpg',
   },
   {
     slug: 'sports-health-club',
@@ -46,6 +49,7 @@ export const CLUBS_DATA = [
     icon: 'Dumbbell',
     gradient: 'from-green-500 to-emerald-600',
     bg: 'bg-green-500',
+    image: '/images/clubs/sports-health-club.jpg',
   },
   {
     slug: 'media-club',
@@ -58,6 +62,7 @@ export const CLUBS_DATA = [
     icon: 'Camera',
     gradient: 'from-purple-500 to-violet-600',
     bg: 'bg-purple-500',
+    image: '/images/clubs/media-club.jpg',
   },
   {
     slug: 'startup-internship-club',
@@ -70,6 +75,7 @@ export const CLUBS_DATA = [
     icon: 'Rocket',
     gradient: 'from-orange-500 to-red-500',
     bg: 'bg-orange-500',
+    image: '/images/clubs/startup-internship-club.jpg',
   },
   {
     slug: 'social-environmental-club',
@@ -82,6 +88,7 @@ export const CLUBS_DATA = [
     icon: 'Leaf',
     gradient: 'from-teal-500 to-cyan-600',
     bg: 'bg-teal-500',
+    image: '/images/clubs/social-environmental-club.jpg',
   },
   {
     slug: 'placement-club',
@@ -94,5 +101,6 @@ export const CLUBS_DATA = [
     icon: 'Briefcase',
     gradient: 'from-blue-800 to-indigo-900',
     bg: 'bg-blue-900',
+    image: '/images/clubs/placement-club.jpg',
   },
 ] as const;
