@@ -7,6 +7,7 @@ export interface IEvent extends Document {
   date: Date;
   venue: string;
   banner?: string;
+  capacity?: number;
   isPublished: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -20,6 +21,7 @@ const eventSchema = new Schema<IEvent>(
     date: { type: Date, required: true },
     venue: { type: String, required: true },
     banner: { type: String },
+    capacity: { type: Number, default: 100 },
     isPublished: { type: Boolean, default: false },
   },
   { timestamps: true }

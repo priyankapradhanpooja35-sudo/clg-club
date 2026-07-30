@@ -44,8 +44,17 @@ export async function POST(req: NextRequest) {
     const { eventId } = body;
     if (!eventId) return errorResponse('eventId is required');
 
+    const Event = (await import('@/models/Event')).default;
+    const event = await Event.findById(eventId);
+    if (!event) return errorResponse('Event not found', 404);
+
     const existing = await Registration.findOne({ eventId, userId: payload.id });
     if (existing) return errorResponse('Already registered for this event', 409);
+
+    const currentRegCount = await Registration.countDocuments({ eventId });
+    if (event.capacity && currentRegCount >= event.capacity) {
+      return errorResponse('Event is full (capacity reached)', 400);
+    }
 
     const qrCodeData = `bec-reg-${randomUUID()}`;
     const registration = await Registration.create({
