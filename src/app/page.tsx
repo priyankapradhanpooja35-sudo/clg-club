@@ -54,7 +54,7 @@ export default function LandingPage() {
       category: 'Technical',
       categoryColor: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300',
       icon: Code,
-      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80',
+      image: '/images/clubs/microsoft-club.jpg',
       members: 24,
       upcoming: 2,
       slug: 'microsoft-club',
@@ -64,7 +64,7 @@ export default function LandingPage() {
       category: 'Cultural',
       categoryColor: 'bg-pink-100 text-pink-700 dark:bg-pink-950/60 dark:text-pink-300',
       icon: Music,
-      image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80',
+      image: '/images/clubs/music-dance-club.jpg',
       members: 18,
       upcoming: 1,
       slug: 'music-dance-club',
@@ -74,7 +74,7 @@ export default function LandingPage() {
       category: 'Technical',
       categoryColor: 'bg-teal-100 text-teal-700 dark:bg-teal-950/60 dark:text-teal-300',
       icon: Cpu,
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&auto=format&fit=crop&q=80',
+      image: '/images/clubs/startup-internship-club.jpg',
       members: 20,
       upcoming: 3,
       slug: 'startup-internship-club',
@@ -84,7 +84,7 @@ export default function LandingPage() {
       category: 'Sports',
       categoryColor: 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300',
       icon: Dumbbell,
-      image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80',
+      image: '/images/clubs/sports-health-club.png',
       members: 22,
       upcoming: 2,
       slug: 'sports-health-club',
@@ -341,34 +341,38 @@ export default function LandingPage() {
                   transition={{ delay: i * 0.08 }}
                 >
                   <Link href={`/clubs/${club.slug}`}>
-                    <div className="group rounded-2xl border border-slate-200 bg-slate-900 text-white overflow-hidden shadow-lg hover:-translate-y-1.5 transition-all duration-300 flex flex-col h-full">
+                    <div className="group rounded-2xl border border-slate-200 bg-white text-slate-800 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(37,99,235,0.08)] transition-all duration-200 flex flex-col h-full">
                       {/* Top Image */}
-                      <div className="relative h-40 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden bg-slate-100">
                         <img src={club.image} alt={club.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-white/10 via-transparent to-transparent pointer-events-none" />
                       </div>
 
                       {/* Content */}
                       <div className="p-5 flex flex-col flex-1 justify-between">
                         <div>
-                          <div className="flex items-center gap-2 mb-2">
-                            <div className="h-7 w-7 rounded-lg bg-blue-600 flex items-center justify-center text-white">
-                              <Icon className="w-4 h-4" />
+                          <div className="flex items-center gap-2 mb-2.5">
+                            {/* Small icon badge next to category */}
+                            <div className="h-7 w-7 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#2563EB]">
+                              <Icon className="w-4 h-4 text-[#2563EB]" />
                             </div>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${club.categoryColor}`}>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-md ${
+                              club.category === 'Technical' ? 'bg-[#EFF6FF] text-[#2563EB]' :
+                              club.category === 'Cultural' ? 'bg-[#FDF2F8] text-[#DB2777]' : 'bg-[#FFF7ED] text-[#D97706]'
+                            }`}>
                               {club.category}
                             </span>
                           </div>
-                          <h3 className="font-bold text-lg text-white mb-2">{club.name}</h3>
+                          <h3 className="font-bold text-base text-[#1E293B] mb-2">{club.name}</h3>
                         </div>
 
-                        <div className="flex items-center gap-4 text-xs text-slate-400 border-t border-slate-800 pt-3 mt-3">
-                          <span className="flex items-center gap-1">
-                            <Users className="w-3.5 h-3.5 text-slate-400" /> {club.members} Members
+                        <div className="flex items-center gap-4 text-xs text-[#64748B] border-t border-gray-100 pt-3 mt-3">
+                          <span className="flex items-center gap-1.5">
+                            <Users className="w-3.5 h-3.5 text-[#64748B]" /> {club.members} Members
                           </span>
-                          <span>•</span>
-                          <span className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5 text-slate-400" /> {club.upcoming} Upcoming
+                          <span className="text-gray-350">•</span>
+                          <span className="flex items-center gap-1.5">
+                            <Calendar className="w-3.5 h-3.5 text-[#64748B]" /> {club.upcoming} Upcoming
                           </span>
                         </div>
                       </div>
