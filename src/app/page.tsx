@@ -170,11 +170,10 @@ export default function LandingPage() {
   ];
 
   const galleryImages = [
-    { title: 'Campus Music Fest Stage', url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80' },
-    { title: 'Student Team Collaboration', url: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&auto=format&fit=crop&q=80' },
-    { title: 'BEC Campus Building', url: '/images/bec-building.jpg' },
-    { title: 'CS Coding Workshop', url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&auto=format&fit=crop&q=80' },
-    { title: 'Annual Fest Performance', url: 'https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=600&auto=format&fit=crop&q=80' },
+    { title: 'BEC Campus Aerial View', url: '/images/bec-building.jpg' },
+    { title: 'BEC Campus Fest & Outdoor Group', url: '/images/moments-students-outdoor.jpg' },
+    { title: 'Springer ICDECT Conference Team', url: '/images/moments-conference-group.jpg' },
+    { title: 'Campus Celebration & Faculty Honor', url: '/images/moments-cheering-celebration.jpg' },
   ];
 
   const testimonials = [
@@ -565,7 +564,7 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {galleryImages.map((img, i) => (
               <motion.div
                 key={img.title}
@@ -573,11 +572,11 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="group relative h-48 rounded-2xl overflow-hidden shadow-md cursor-pointer"
+                className="group relative h-60 rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-slate-900 cursor-pointer"
               >
-                <img src={img.url} alt={img.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
-                  <p className="text-xs font-bold text-white truncate">{img.title}</p>
+                <img src={img.url} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                  <p className="text-xs font-bold text-white leading-tight">{img.title}</p>
                 </div>
               </motion.div>
             ))}
