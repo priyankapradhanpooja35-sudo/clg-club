@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { notFound, useParams } from 'next/navigation';
+import { notFound, useParams, usePathname } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import { Card, CardContent } from '@/components/ui/Card';
 import Badge from '@/components/ui/Badge';
@@ -27,10 +27,18 @@ const ICON_MAP: Record<string, React.ElementType> = {
 };
 
 export default function ClubProfilePage() {
-  const rawSlug = useParams<{ slug: string }>()?.slug || '';
-  const slug = decodeURIComponent(rawSlug).toLowerCase().replace(/\s+/g, '-');
-  const isMicrosoft = slug === 'microsoft-club';
-  const isMusic = slug === 'music-dance-club' || slug === 'music-and-dance-club';
+  const params = useParams<{ slug?: string }>();
+  const pathname = usePathname() || '';
+
+  // Extract raw slug from params or pathname
+  let rawSlug = params?.slug || '';
+  if (!rawSlug && pathname.includes('/clubs/')) {
+    rawSlug = pathname.split('/clubs/')[1] || '';
+  }
+
+  const slug = decodeURIComponent(rawSlug).toLowerCase().replace(/%20|\s+/g, '-');
+  const isMusic = slug.includes('music') || slug.includes('dance');
+  const isMicrosoft = slug.includes('microsoft');
 
   const { user } = useAuth();
   const [clubDoc, setClubDoc] = useState<any>(null);
@@ -42,7 +50,10 @@ export default function ClubProfilePage() {
   const [activeTab, setActiveTab] = useState('Overview');
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  const staticData = CLUBS_DATA.find(c => c.slug === slug) || (isMusic ? CLUBS_DATA[1] : CLUBS_DATA[0]);
+  const staticData = CLUBS_DATA.find(c => c.slug === slug)
+    || (isMusic ? CLUBS_DATA.find(c => c.slug === 'music-dance-club') : null)
+    || (isMicrosoft ? CLUBS_DATA.find(c => c.slug === 'microsoft-club') : null)
+    || CLUBS_DATA[0];
 
   useEffect(() => {
     if (!slug) return;
