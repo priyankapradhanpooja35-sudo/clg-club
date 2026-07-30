@@ -126,37 +126,43 @@ export default function LandingPage() {
       title: 'Real-Time Use',
       desc: 'Register, join & track events in real-time.',
       icon: Activity,
-      color: 'bg-blue-50 text-blue-600 border-blue-100 dark:bg-blue-950/30 dark:border-blue-900',
+      gradient: 'from-blue-500 to-indigo-600',
+      stat: '13 events live now',
     },
     {
       title: 'Smart Dashboard',
-      desc: 'Manage activities, achievements & attendance easily.',
+      desc: 'Manage activities, achievements & attendance easily with live statistics.',
       icon: LayoutDashboardIcon,
-      color: 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-950/30 dark:border-emerald-900',
+      gradient: 'from-indigo-600 to-purple-600',
+      stat: '8 clubs tracked',
     },
     {
       title: 'Instant Notifications',
       desc: 'Get updates about events, clubs & announcements.',
       icon: Bell,
-      color: 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-950/30 dark:border-amber-900',
+      gradient: 'from-sky-400 to-blue-600',
+      stat: '500+ alerts sent',
     },
     {
       title: 'Gallery & Media',
       desc: 'Upload and explore event photos and videos.',
       icon: ImageIcon,
-      color: 'bg-purple-50 text-purple-600 border-purple-100 dark:bg-purple-950/30 dark:border-purple-900',
+      gradient: 'from-teal-400 to-emerald-600',
+      stat: '240+ photos',
     },
     {
       title: 'Reports & Export',
       desc: 'Generate & export reports in PDF / Excel.',
       icon: FileText,
-      color: 'bg-pink-50 text-pink-600 border-pink-100 dark:bg-pink-950/30 dark:border-pink-900',
+      gradient: 'from-blue-600 to-cyan-500',
+      stat: '15 reports this month',
     },
     {
       title: 'Secure & Role Based',
-      desc: 'Different access for admin, faculty, coordinators & members.',
+      desc: 'Different access levels tailored specifically for admins, faculty coordinators, club heads, and students.',
       icon: ShieldCheck,
-      color: 'bg-teal-50 text-teal-600 border-teal-100 dark:bg-teal-950/30 dark:border-teal-900',
+      gradient: 'from-indigo-500 to-blue-700',
+      stat: '5 access levels',
     },
   ];
 
@@ -464,35 +470,93 @@ export default function LandingPage() {
       </section>
 
       {/* 5. PLATFORM HIGHLIGHTS / A PLATFORM BUILT FOR EVERYONE */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-50">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 block mb-1">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F8FAFC] dark:bg-slate-950 border-b border-slate-200/50 relative overflow-hidden">
+        {/* Blueprint Pattern background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-[0.05] pointer-events-none" />
+
+        <div className="mx-auto max-w-7xl relative z-10">
+          <div className="text-center mb-16">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-blue-50 dark:bg-blue-950/40 dark:text-blue-400 px-3.5 py-1 rounded-full">
               PLATFORM HIGHLIGHTS
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mt-4">
               A Platform Built for Everyone
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {highlights.map((item, i) => {
               const Icon = item.icon;
+              const isSmartDashboard = item.title === 'Smart Dashboard';
+              const isSecureRole = item.title === 'Secure & Role Based';
+
               return (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                  className={`rounded-2xl border ${item.color} p-6 shadow-sm flex flex-col justify-between`}
+                  transition={{ delay: i * 0.05, duration: 0.3 }}
+                  className={`${
+                    isSmartDashboard ? 'md:col-span-2' :
+                    isSecureRole ? 'md:col-span-2 lg:col-span-3' : 'col-span-1'
+                  }`}
                 >
-                  <div className="h-10 w-10 rounded-xl bg-white flex items-center justify-center shadow-sm mb-4">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 text-base mb-1">{item.title}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                  <div className="relative p-[1px] rounded-[17px] overflow-hidden group/card bg-transparent transition-all duration-300 hover:-translate-y-1 h-full">
+                    {/* Border Glow Background element */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#2563EB] to-[#60A5FA] opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 rounded-[17px]" />
+
+                    {/* Card container */}
+                    <div className="relative z-10 bg-white dark:bg-slate-900 rounded-[16px] p-6 h-full flex flex-col justify-between shadow-[0_4px_20px_rgba(0,0,0,0.04)] group-hover/card:shadow-[0_12px_32px_rgba(37,99,235,0.08)] transition-all duration-300 border border-slate-200/80 dark:border-slate-800">
+                      <div>
+                        {/* Top layout: Icon gradient & stat badge */}
+                        <div className="flex items-center justify-between mb-5">
+                          <div className={`h-11 w-11 rounded-xl bg-gradient-to-br ${item.gradient} flex items-center justify-center shadow-md text-white transition-transform duration-300 group-hover/card:rotate-6 group-hover/card:scale-105`}>
+                            <Icon className="w-5 h-5 text-white" />
+                          </div>
+                          <span className="inline-flex items-center text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-[#2563EB] dark:bg-blue-950/40 dark:text-blue-300 shrink-0">
+                            {item.stat}
+                          </span>
+                        </div>
+
+                        {/* Title and Description */}
+                        <h3 className="font-bold text-slate-900 dark:text-white text-base mb-1 tracking-tight">{item.title}</h3>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-2xl">{item.desc}</p>
+                      </div>
+
+                      {/* Featured mini components */}
+                      {isSmartDashboard && (
+                        <div className="mt-5 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-100 dark:border-slate-800 flex items-end justify-between h-20 gap-2.5 max-w-[280px]">
+                          {[35, 60, 45, 80, 50, 95, 70].map((h, idx) => (
+                            <div key={idx} className="flex-1 bg-blue-50/50 dark:bg-slate-900 rounded-md h-full flex items-end">
+                              <motion.div
+                                initial={{ height: 0 }}
+                                whileInView={{ height: `${h}%` }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.05, duration: 0.6 }}
+                                className="w-full bg-gradient-to-t from-blue-600 to-indigo-500 rounded-md"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {isSecureRole && (
+                        <div className="mt-5 flex flex-wrap gap-2.5 items-center">
+                          {[
+                            { label: 'Admin', color: 'bg-red-50 text-red-600 border-red-100 dark:bg-red-950/20 dark:text-red-400 dark:border-red-900/30' },
+                            { label: 'Faculty', color: 'bg-purple-50 text-purple-600 border-purple-100 dark:bg-purple-950/20 dark:text-purple-400 dark:border-purple-900/30' },
+                            { label: 'Club Head', color: 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-950/20 dark:text-emerald-400 dark:border-emerald-900/30' },
+                            { label: 'Student', color: 'bg-blue-50 text-blue-600 border-blue-100 dark:bg-blue-950/20 dark:text-blue-400 dark:border-blue-900/30' },
+                          ].map((role) => (
+                            <span key={role.label} className={`text-[10px] font-bold px-3 py-1 rounded-full border ${role.color}`}>
+                              🛡️ {role.label}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+
+                    </div>
                   </div>
                 </motion.div>
               );
