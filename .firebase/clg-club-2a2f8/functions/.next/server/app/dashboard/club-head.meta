@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/dashboard/layout,_N_T_/dashboard/club-head/layout,_N_T_/dashboard/club-head/page,_N_T_/dashboard/club-head"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/dashboard/club-head/__PAGE__",
+    "/dashboard/club-head",
+    "/dashboard",
+    "/_index",
+    "/_head"
+  ]
+}

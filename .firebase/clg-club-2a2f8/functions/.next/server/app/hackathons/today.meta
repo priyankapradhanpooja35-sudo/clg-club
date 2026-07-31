@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/hackathons/layout,_N_T_/hackathons/today/layout,_N_T_/hackathons/today/page,_N_T_/hackathons/today"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/hackathons/today/__PAGE__",
+    "/hackathons/today",
+    "/hackathons",
+    "/_index",
+    "/_head"
+  ]
+}

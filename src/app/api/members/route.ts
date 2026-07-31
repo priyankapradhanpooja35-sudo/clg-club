@@ -1,3 +1,5 @@
+export const dynamic = 'force-static';
+
 import { NextRequest } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Membership from '@/models/Membership';

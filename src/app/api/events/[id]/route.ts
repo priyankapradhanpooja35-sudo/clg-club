@@ -1,3 +1,9 @@
+export const dynamic = 'force-static';
+
+export function generateStaticParams() {
+  return [{ id: '1' }];
+}
+
 import { NextRequest } from 'next/server';
 import dbConnect from '@/lib/mongodb';
 import Event from '@/models/Event';

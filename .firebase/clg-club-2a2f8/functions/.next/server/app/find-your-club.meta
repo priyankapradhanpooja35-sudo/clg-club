@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/find-your-club/layout,_N_T_/find-your-club/page,_N_T_/find-your-club"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/find-your-club/__PAGE__",
+    "/find-your-club",
+    "/_index",
+    "/_head"
+  ]
+}

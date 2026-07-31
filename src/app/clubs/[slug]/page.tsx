@@ -110,7 +110,7 @@ export default function ClubProfilePage() {
         <div id="sec-overview" className="scroll-mt-24">
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-none relative overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
+
               {/* Left Info */}
               <div className="lg:col-span-7 space-y-5">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -176,11 +176,10 @@ export default function ClubProfilePage() {
                   </Button>
                   <button
                     onClick={() => { setFollowing(!following); toast(following ? 'Unfollowed club' : `Following ${staticData.name}!`, 'info'); }}
-                    className={`border px-5 py-2.5 rounded-xl text-xs font-medium transition-colors cursor-pointer ${
-                      following
+                    className={`border px-5 py-2.5 rounded-xl text-xs font-medium transition-colors cursor-pointer ${following
                         ? 'border-blue-600 text-blue-600 bg-blue-50 dark:bg-blue-950/40'
                         : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
-                    }`}
+                      }`}
                   >
                     <Bookmark className={`w-3.5 h-3.5 inline-block mr-1.5 ${following ? 'fill-blue-600' : ''}`} />
                     {following ? 'Following' : 'Follow Club'}
@@ -239,11 +238,10 @@ export default function ClubProfilePage() {
                     <button
                       key={tab.name}
                       onClick={() => scrollToSection(tab.name, tab.id)}
-                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
-                        isActive
+                      className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${isActive
                           ? 'border-2 border-slate-900 dark:border-slate-100 text-slate-900 dark:text-slate-100 font-semibold bg-white dark:bg-slate-900'
                           : 'border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 bg-white dark:bg-slate-900'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <IconComp className="w-3.5 h-3.5 text-slate-400" />
@@ -341,16 +339,16 @@ export default function ClubProfilePage() {
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">{staticData.hodName}</h3>
                   <p className="text-xs font-semibold text-blue-600 dark:text-blue-400">{staticData.hodDesignation} • {staticData.hodExperience}</p>
-                  
+
                   <div className="flex flex-wrap gap-2 justify-center md:justify-start pt-0.5">
                     <span className="text-[11px] px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400">{staticData.hodQualification}</span>
                     <span className="text-[11px] px-2.5 py-0.5 rounded-full border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400">{staticData.hodSpecialization}</span>
                   </div>
-                  
+
                   <blockquote className="border-l-2 border-slate-300 dark:border-slate-700 pl-3 py-0.5 text-xs text-slate-500 dark:text-slate-400 italic">
                     {staticData.hodQuote}
                   </blockquote>
-                  
+
                   <div className="flex items-center justify-center md:justify-start gap-4 pt-1 text-xs text-slate-500 dark:text-slate-400">
                     <a href={`mailto:${staticData.hodEmail}`} className="flex items-center gap-1 hover:text-slate-900 dark:hover:text-white transition-colors">
                       <Mail className="w-3.5 h-3.5" /> Email

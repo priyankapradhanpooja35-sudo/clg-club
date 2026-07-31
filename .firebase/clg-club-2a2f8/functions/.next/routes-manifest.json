@@ -1,0 +1,408 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/clubs/microsoft%20club",
+      "destination": "/clubs/microsoft-club",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/clubs/microsoft%20club(?:/)?$"
+    },
+    {
+      "source": "/clubs/microsoft club",
+      "destination": "/clubs/microsoft-club",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/clubs/microsoft club(?:/)?$"
+    },
+    {
+      "source": "/clubs/music%20dance%20club",
+      "destination": "/clubs/music-dance-club",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/clubs/music%20dance%20club(?:/)?$"
+    },
+    {
+      "source": "/clubs/music dance club",
+      "destination": "/clubs/music-dance-club",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/clubs/music dance club(?:/)?$"
+    },
+    {
+      "source": "/clubs/music-and-dance-club",
+      "destination": "/clubs/music-dance-club",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/clubs/music-and-dance-club(?:/)?$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/clubs/[id]",
+      "regex": "^/api/clubs/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/clubs/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/events/[id]",
+      "regex": "^/api/events/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/events/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/clubs/[slug]",
+      "regex": "^/clubs/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/clubs/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/hackathons/archive/[id]",
+      "regex": "^/hackathons/archive/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/hackathons/archive/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about",
+      "regex": "^/about(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about(?:/)?$"
+    },
+    {
+      "page": "/announcements",
+      "regex": "^/announcements(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/announcements(?:/)?$"
+    },
+    {
+      "page": "/api/announcements",
+      "regex": "^/api/announcements(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/announcements(?:/)?$"
+    },
+    {
+      "page": "/api/auth/login",
+      "regex": "^/api/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/login(?:/)?$"
+    },
+    {
+      "page": "/api/auth/logout",
+      "regex": "^/api/auth/logout(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/logout(?:/)?$"
+    },
+    {
+      "page": "/api/auth/me",
+      "regex": "^/api/auth/me(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/me(?:/)?$"
+    },
+    {
+      "page": "/api/auth/register",
+      "regex": "^/api/auth/register(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/register(?:/)?$"
+    },
+    {
+      "page": "/api/auth/signup",
+      "regex": "^/api/auth/signup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/signup(?:/)?$"
+    },
+    {
+      "page": "/api/clubs",
+      "regex": "^/api/clubs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/clubs(?:/)?$"
+    },
+    {
+      "page": "/api/events",
+      "regex": "^/api/events(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/events(?:/)?$"
+    },
+    {
+      "page": "/api/events/recommended",
+      "regex": "^/api/events/recommended(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/events/recommended(?:/)?$"
+    },
+    {
+      "page": "/api/leaderboard",
+      "regex": "^/api/leaderboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/leaderboard(?:/)?$"
+    },
+    {
+      "page": "/api/members",
+      "regex": "^/api/members(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/members(?:/)?$"
+    },
+    {
+      "page": "/api/registrations",
+      "regex": "^/api/registrations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/registrations(?:/)?$"
+    },
+    {
+      "page": "/api/registrations/checkin",
+      "regex": "^/api/registrations/checkin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/registrations/checkin(?:/)?$"
+    },
+    {
+      "page": "/api/stats",
+      "regex": "^/api/stats(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/stats(?:/)?$"
+    },
+    {
+      "page": "/api/tasks",
+      "regex": "^/api/tasks(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/tasks(?:/)?$"
+    },
+    {
+      "page": "/api/users",
+      "regex": "^/api/users(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/users(?:/)?$"
+    },
+    {
+      "page": "/calendar",
+      "regex": "^/calendar(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/calendar(?:/)?$"
+    },
+    {
+      "page": "/clubs",
+      "regex": "^/clubs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/clubs(?:/)?$"
+    },
+    {
+      "page": "/clubs/microsoft-club",
+      "regex": "^/clubs/microsoft\\-club(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/clubs/microsoft\\-club(?:/)?$"
+    },
+    {
+      "page": "/clubs/music-and-dance-club",
+      "regex": "^/clubs/music\\-and\\-dance\\-club(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/clubs/music\\-and\\-dance\\-club(?:/)?$"
+    },
+    {
+      "page": "/clubs/music-dance-club",
+      "regex": "^/clubs/music\\-dance\\-club(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/clubs/music\\-dance\\-club(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin",
+      "regex": "^/dashboard/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/announcements",
+      "regex": "^/dashboard/admin/announcements(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/announcements(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/clubs",
+      "regex": "^/dashboard/admin/clubs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/clubs(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/events",
+      "regex": "^/dashboard/admin/events(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/events(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/logs",
+      "regex": "^/dashboard/admin/logs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/logs(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/members",
+      "regex": "^/dashboard/admin/members(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/members(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/registrations",
+      "regex": "^/dashboard/admin/registrations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/registrations(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/reports",
+      "regex": "^/dashboard/admin/reports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/reports(?:/)?$"
+    },
+    {
+      "page": "/dashboard/admin/settings",
+      "regex": "^/dashboard/admin/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/admin/settings(?:/)?$"
+    },
+    {
+      "page": "/dashboard/club-head",
+      "regex": "^/dashboard/club\\-head(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/club\\-head(?:/)?$"
+    },
+    {
+      "page": "/dashboard/club-head/scan",
+      "regex": "^/dashboard/club\\-head/scan(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/club\\-head/scan(?:/)?$"
+    },
+    {
+      "page": "/dashboard/faculty",
+      "regex": "^/dashboard/faculty(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/faculty(?:/)?$"
+    },
+    {
+      "page": "/dashboard/student",
+      "regex": "^/dashboard/student(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/student(?:/)?$"
+    },
+    {
+      "page": "/dashboard/student/tickets",
+      "regex": "^/dashboard/student/tickets(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/student/tickets(?:/)?$"
+    },
+    {
+      "page": "/events",
+      "regex": "^/events(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/events(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/find-your-club",
+      "regex": "^/find\\-your\\-club(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/find\\-your\\-club(?:/)?$"
+    },
+    {
+      "page": "/forgot-password",
+      "regex": "^/forgot\\-password(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/forgot\\-password(?:/)?$"
+    },
+    {
+      "page": "/hackathons/archive",
+      "regex": "^/hackathons/archive(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hackathons/archive(?:/)?$"
+    },
+    {
+      "page": "/hackathons/today",
+      "regex": "^/hackathons/today(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/hackathons/today(?:/)?$"
+    },
+    {
+      "page": "/leaderboard",
+      "regex": "^/leaderboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/leaderboard(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/notices",
+      "regex": "^/notices(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/notices(?:/)?$"
+    },
+    {
+      "page": "/signup",
+      "regex": "^/signup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/signup(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

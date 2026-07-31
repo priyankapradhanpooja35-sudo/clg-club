@@ -1,0 +1,3 @@
+module.exports=[2747,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function(){return(0,b.jsx)("div",{className:"min-h-screen flex items-center justify-center bg-[var(--background)]",children:(0,b.jsxs)("div",{className:"flex flex-col items-center gap-4",children:[(0,b.jsxs)("div",{className:"relative w-12 h-12",children:[(0,b.jsx)("div",{className:"absolute inset-0 rounded-full border-2 border-violet-200 dark:border-violet-900"}),(0,b.jsx)("div",{className:"absolute inset-0 rounded-full border-2 border-t-violet-600 animate-spin"})]}),(0,b.jsx)("p",{className:"text-sm font-medium text-gray-500",children:"Loading BEC Club Hub..."})]})})}])},25210,a=>{a.n(a.i(2747))}];
+
+//# sourceMappingURL=src_app_loading_tsx_01g_-m0._.js.map
