@@ -73,10 +73,13 @@ export default function LoginPage() {
         <div className="rounded-[24px] border border-white/60 bg-white/85 dark:bg-slate-900/80 dark:border-slate-800/60 backdrop-blur-[16px] shadow-[0_12px_40px_rgba(37,99,235,0.08)] p-8">
           {/* Logo Title */}
           <div className="flex flex-col items-center mb-8">
-            <Link href="/" className="flex items-center gap-2 mb-4 group">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-700 via-blue-600 to-indigo-500 font-black text-sm text-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
-                BEC
+            <Link href="/" className="flex items-center gap-3.5 mb-4 group">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full overflow-hidden bg-white border border-slate-200/80 shadow-md shadow-blue-500/15 transition-transform duration-200 group-hover:scale-105">
+                <img src="/images/bec-logo-clean.png" alt="BEC Logo" className="w-full h-full object-cover rounded-full" />
               </div>
+              <span className="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                BEC Club Hub
+              </span>
             </Link>
             <h1 className="text-2xl font-bold text-slate-950 dark:text-white tracking-tight flex items-center gap-1.5">
               Welcome back

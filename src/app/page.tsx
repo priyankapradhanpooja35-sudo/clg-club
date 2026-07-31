@@ -650,8 +650,8 @@ export default function LandingPage() {
             {/* Col 1 */}
             <div className="md:col-span-1">
               <div className="flex items-center gap-2.5 mb-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 font-black text-xs text-white">
-                  BEC
+                <div className="flex h-8 w-8 items-center justify-center rounded-full overflow-hidden bg-white border border-slate-700">
+                  <img src="/images/bec-logo-clean.png" alt="BEC Logo" className="w-full h-full object-cover rounded-full" />
                 </div>
                 <span className="font-bold text-white text-base">BEC Club Hub</span>
               </div>

@@ -67,11 +67,20 @@ export default function Sidebar({ role }: SidebarProps) {
         collapsed ? 'w-16' : 'w-60'
       )}
     >
-      <div className="flex items-center justify-between p-4 border-b border-[var(--border)]">
-        {!collapsed && (
-          <span className="text-xs font-semibold uppercase tracking-widest text-violet-600 dark:text-violet-400">
-            {role === 'club-head' ? 'Club Head' : role.charAt(0).toUpperCase() + role.slice(1)} Panel
-          </span>
+      <div className="flex items-center justify-between p-3.5 border-b border-[var(--border)]">
+        {!collapsed ? (
+          <div className="flex items-center gap-2.5 overflow-hidden">
+            <div className="w-7 h-7 rounded-full overflow-hidden bg-white border border-slate-200 shrink-0">
+              <img src="/images/bec-logo-clean.png" alt="BEC Logo" className="w-full h-full object-cover rounded-full" />
+            </div>
+            <span className="text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400 truncate">
+              {role === 'club-head' ? 'Club Head' : role.charAt(0).toUpperCase() + role.slice(1)} Panel
+            </span>
+          </div>
+        ) : (
+          <div className="w-7 h-7 rounded-full overflow-hidden bg-white border border-slate-200 shrink-0 mx-auto">
+            <img src="/images/bec-logo-clean.png" alt="BEC Logo" className="w-full h-full object-cover rounded-full" />
+          </div>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}

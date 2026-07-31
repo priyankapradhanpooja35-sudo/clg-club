@@ -47,11 +47,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <header className="sticky top-0 z-30 h-16 border-b border-[var(--border)] bg-[var(--card)]/90 backdrop-blur-md px-4 lg:px-8 flex items-center justify-between">
         {/* Left: Brand + Search */}
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-700 font-black text-xs text-white">
-              BEC
+          <Link href="/" className="flex items-center gap-2.5 shrink-0 whitespace-nowrap">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full overflow-hidden bg-white border border-slate-200 shadow-sm">
+              <img src="/images/bec-logo-clean.png" alt="BEC Logo" className="w-full h-full object-cover rounded-full" />
             </div>
-            <span className="font-bold text-sm text-[var(--foreground)] hidden lg:block">
+            <span className="font-bold text-sm text-[var(--foreground)] hidden lg:block whitespace-nowrap">
               BEC <span className="text-violet-600">Enterprise Admin</span>
             </span>
           </Link>
