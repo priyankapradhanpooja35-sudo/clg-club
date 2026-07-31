@@ -131,11 +131,9 @@ export default function ClubsPage() {
 
                       {/* Content Section */}
                       <CardContent className="flex flex-col flex-1 pt-8 pb-6 px-5 relative">
-                        {/* Layered Icon Badge overlapping the banner */}
-                        <div className="absolute -top-7 left-5 h-12 w-12 flex items-center justify-center rounded-xl bg-white border border-blue-100/60 shadow-sm dark:bg-slate-950 dark:border-slate-800">
-                          <div className="h-9.5 w-9.5 rounded-lg bg-[#EFF6FF] dark:bg-slate-900 flex items-center justify-center">
-                            <Icon className="w-5 h-5 text-[#2563EB] dark:text-blue-400" />
-                          </div>
+                        {/* Layered Logo Badge overlapping the banner */}
+                        <div className="absolute -top-7 left-5 h-12 w-12 flex items-center justify-center rounded-xl bg-white border border-blue-100/60 shadow-sm dark:bg-slate-950 dark:border-slate-800 overflow-hidden p-1">
+                          <img src={(club as any).logo || club.image} alt={club.name} className="w-full h-full object-contain" />
                         </div>
 
                         {/* Title and Category */}

@@ -460,14 +460,14 @@ export default function LandingPage() {
               </h2>
               <div className="grid grid-cols-2 gap-3">
                 {CLUBS_DATA.map((club) => {
-                  const Icon = ICON_MAP[club.icon] || Star;
+                  const logoUrl = (club as any).logo || club.image || '/images/bec-logo-clean.png';
                   return (
                     <Link key={club.slug} href={`/clubs/${club.slug}`}>
-                      <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white hover:border-blue-300 p-3 shadow-sm hover:shadow transition-all">
-                        <div className={`h-8 w-8 rounded-lg bg-gradient-to-br ${club.gradient} text-white flex items-center justify-center shrink-0`}>
-                          <Icon className="w-4 h-4" />
+                      <div className="flex items-center gap-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-300 dark:hover:border-blue-700 p-2.5 shadow-sm hover:shadow transition-all group">
+                        <div className="h-9 w-9 rounded-lg overflow-hidden bg-white border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0 p-0.5 shadow-xs">
+                          <img src={logoUrl} alt={club.name} className="w-full h-full object-contain" />
                         </div>
-                        <span className="text-xs font-bold text-slate-800 truncate">{club.name}</span>
+                        <span className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">{club.name}</span>
                       </div>
                     </Link>
                   );
