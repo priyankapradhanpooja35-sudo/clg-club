@@ -135,8 +135,8 @@ export default function Navbar() {
           <div className="flex h-12 items-center justify-between">
             {/* Logo + Tagline */}
             <Link href="/" className="flex items-center gap-3 shrink-0 whitespace-nowrap group">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl overflow-hidden bg-white shadow-sm border border-slate-200/80 transition-transform duration-200 group-hover:scale-105">
-                <img src="/images/bec-logo.jpeg" alt="BEC Logo" className="w-full h-full object-contain p-0.5" />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full overflow-hidden bg-white shadow-sm border border-slate-200/80 transition-transform duration-200 group-hover:scale-105">
+                <img src="/images/bec-logo-clean.png" alt="BEC Logo" className="w-full h-full object-cover rounded-full" />
               </div>
               <div className="flex flex-row items-center gap-2.5 whitespace-nowrap shrink-0">
                 <span className="text-base font-bold text-[#1E293B] dark:text-white leading-none tracking-tight whitespace-nowrap">
