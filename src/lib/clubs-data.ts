@@ -417,8 +417,8 @@ export const CLUBS_DATA = [
       { name: "", year: "", quote: "", img: "" }
     ],
     achievementsGallery: [
-      { title: "", img: "" },
-      { title: "", img: "" },
+      { title: "Skill On Wheels Computer Training Drive", img: "/images/clubs/placement-club-new.jpeg" },
+      { title: "Campus Recruitment Drive", img: "/images/clubs/recruitment-drive.jpeg" },
       { title: "", img: "" },
       { title: "", img: "" }
     ],
