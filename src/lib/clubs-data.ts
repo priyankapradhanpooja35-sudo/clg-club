@@ -258,7 +258,7 @@ export const CLUBS_DATA = [
       { name: "Kavya S.", year: "2nd Year, CSE", quote: "We don't just click pictures; we capture the soul of BEC. It's a family of creatives.", img: "https://i.pravatar.cc/150?img=32" }
     ],
     achievementsGallery: [
-      { title: "Annual Film Fest", img: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&q=80" },
+      { title: "Media Team Campus Coverage", img: "/images/clubs/media-club-image.jpeg" },
       { title: "Podcast Setup", img: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=400&q=80" },
       { title: "Live Event Coverage", img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80" },
       { title: "Editing Workshop", img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&q=80" }
