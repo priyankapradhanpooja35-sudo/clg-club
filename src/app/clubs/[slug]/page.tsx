@@ -115,14 +115,8 @@ export default function ClubProfilePage() {
               <div className="lg:col-span-7 space-y-5">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                   {/* Logo Frame */}
-                  <div className="h-16 w-16 shrink-0 rounded-xl bg-slate-50 dark:bg-slate-800 p-2 border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden">
-                    {isMusic ? (
-                      <img src="/images/music-dance-logo.jpg" alt="Music & Dance Club Logo" className="w-full h-full object-contain" />
-                    ) : isMicrosoft ? (
-                      <img src="/images/microsoft-logo-official.jpg" alt="Microsoft Logo" className="w-full h-full object-contain" />
-                    ) : (
-                      <Monitor className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                    )}
+                  <div className="h-16 w-16 shrink-0 rounded-xl bg-white dark:bg-slate-800 p-1.5 border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden">
+                    <img src={(staticData as any).logo || staticData.image} alt={staticData.name} className="w-full h-full object-contain" />
                   </div>
 
                   <div>
