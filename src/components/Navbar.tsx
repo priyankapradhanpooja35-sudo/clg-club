@@ -134,15 +134,15 @@ export default function Navbar() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex h-12 items-center justify-between">
             {/* Logo + Tagline */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden bg-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
-                <img src="/images/bec-logo.jpeg" alt="BEC Logo" className="w-full h-full object-cover" />
+            <Link href="/" className="flex items-center gap-3 shrink-0 whitespace-nowrap group">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl overflow-hidden bg-white shadow-sm border border-slate-200/80 transition-transform duration-200 group-hover:scale-105">
+                <img src="/images/bec-logo.jpeg" alt="BEC Logo" className="w-full h-full object-contain p-0.5" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-base font-bold text-[#1E293B] dark:text-white leading-none tracking-tight">
+              <div className="flex flex-row items-center gap-2.5 whitespace-nowrap shrink-0">
+                <span className="text-base font-bold text-[#1E293B] dark:text-white leading-none tracking-tight whitespace-nowrap">
                   BEC Club Hub
                 </span>
-                <span className="text-[10px] text-[#2563EB] dark:text-blue-400 font-semibold leading-tight mt-0.5 tracking-wide">
+                <span className="hidden xl:inline-block text-[11px] text-[#2563EB] dark:text-blue-400 font-semibold leading-none pl-2.5 border-l border-slate-200 dark:border-slate-700 whitespace-nowrap">
                   Discover. Connect. Grow.
                 </span>
               </div>
