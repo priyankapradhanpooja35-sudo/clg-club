@@ -133,9 +133,9 @@ export default function LandingPage() {
 
   const galleryImages = [
     { title: 'BEC Campus Aerial View', url: '/images/bec-building.jpg' },
-    { title: 'BEC Campus Fest & Outdoor Group', url: '/images/moments-students-outdoor.jpg' },
-    { title: 'Springer ICDECT Conference Team', url: '/images/moments-conference-group.jpg' },
-    { title: 'Campus Celebration & Faculty Honor', url: '/images/moments-cheering-celebration.jpg' },
+    { title: 'BPUT Tech Carnival 2024 Team', url: '/images/moments-bput-tech-carnival.jpg' },
+    { title: 'Annual Sports Meet Champions', url: '/images/moments-sports-team.jpg' },
+    { title: 'Annual Sports Certificate Winners', url: '/images/moments-annual-sports-certificates.jpg' },
   ];
 
   const testimonials = [

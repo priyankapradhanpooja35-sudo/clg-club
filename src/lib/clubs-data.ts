@@ -205,10 +205,10 @@ export const CLUBS_DATA = [
       { name: "Neha D.", year: "2nd Year, Mech", quote: "Representing the college football team has been the proudest moment of my college life.", img: "https://i.pravatar.cc/150?img=49" }
     ],
     achievementsGallery: [
-      { title: "Inter-College Cricket Winners", img: "https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=400&q=80" },
-      { title: "Annual Sports Meet", img: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80" },
-      { title: "Basketball Finals", img: "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=400&q=80" },
-      { title: "Yoga Day Celebration", img: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&q=80" }
+      { title: "Annual Sports Meet Champions", img: "/images/moments-sports-team.jpg" },
+      { title: "Sports Certificate Awardees", img: "/images/moments-annual-sports-certificates.jpg" },
+      { title: "BPUT Tech Carnival Contingent", img: "/images/moments-bput-tech-carnival.jpg" },
+      { title: "BEC Student Industrial Trip", img: "/images/moments-bus-trip.jpg" }
     ],
   },
   {
