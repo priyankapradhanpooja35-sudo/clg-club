@@ -6,13 +6,13 @@ import Badge from '@/components/ui/Badge';
 import Modal from '@/components/ui/Modal';
 import ConfirmModal from '@/components/ui/ConfirmModal';
 import { toast } from '@/components/ui/Toast';
-import { Plus, Trash2, Megaphone, AlertTriangle } from 'lucide-react';
+import { Plus, Trash2, Megaphone, AlertTriangle, Edit2 } from 'lucide-react';
 
 interface AnnRow {
   _id: string;
   title: string;
   content: string;
-  priority: 'General' | 'Urgent';
+  priority: 'General' | 'Urgent' | 'Event' | 'Achievement' | 'Deadline' | 'ClubHead';
   createdAt: string;
 }
 
@@ -23,7 +23,7 @@ export default function AdminAnnouncementsPage() {
   const [deleteTarget, setDeleteTarget] = useState<AnnRow | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const [form, setForm] = useState({ title: '', content: '', priority: 'General' });
+  const [form, setForm] = useState({ id: '', title: '', content: '', priority: 'General' });
 
   const fetchAnnouncements = async () => {
     try {
@@ -49,21 +49,27 @@ export default function AdminAnnouncementsPage() {
     }
     setSaving(true);
     try {
+      const isEditing = !!form.id;
       const res = await fetch('/api/announcements', {
-        method: 'POST',
+        method: isEditing ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
       const data = await res.json();
       if (data.success) {
-        toast('Announcement posted', 'success');
+        toast(isEditing ? 'Announcement updated' : 'Announcement posted', 'success');
         setModalOpen(false);
-        setForm({ title: '', content: '', priority: 'General' });
+        setForm({ id: '', title: '', content: '', priority: 'General' });
         fetchAnnouncements();
       }
     } finally {
       setSaving(false);
     }
+  };
+
+  const openEditModal = (row: AnnRow) => {
+    setForm({ id: row._id, title: row.title, content: row.content, priority: row.priority });
+    setModalOpen(true);
   };
 
   const handleDelete = async () => {
@@ -101,7 +107,7 @@ export default function AdminAnnouncementsPage() {
       header: 'Priority',
       sortable: true,
       render: (row) => (
-        <Badge variant={row.priority === 'Urgent' ? 'urgent' : 'default'}>
+        <Badge variant={['Urgent', 'Deadline'].includes(row.priority) ? 'urgent' : 'default'}>
           {row.priority}
         </Badge>
       ),
@@ -119,13 +125,22 @@ export default function AdminAnnouncementsPage() {
       key: 'actions',
       header: 'Actions',
       render: (row) => (
-        <button
-          onClick={() => setDeleteTarget(row)}
-          className="p-1.5 rounded-lg text-red-400 hover:bg-red-50 hover:text-red-600"
-          title="Delete"
-        >
-          <Trash2 className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => openEditModal(row)}
+            className="p-1.5 rounded-lg text-blue-400 hover:bg-blue-50 hover:text-blue-600"
+            title="Edit"
+          >
+            <Edit2 className="w-4 h-4" />
+          </button>
+          <button
+            onClick={() => setDeleteTarget(row)}
+            className="p-1.5 rounded-lg text-red-400 hover:bg-red-50 hover:text-red-600"
+            title="Delete"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
       ),
     },
   ];
@@ -137,7 +152,7 @@ export default function AdminAnnouncementsPage() {
           <h1 className="text-2xl font-black text-[var(--foreground)]">Announcements Moderation</h1>
           <p className="text-xs text-gray-400 mt-0.5">Post campus notices or moderate announcements from club heads.</p>
         </div>
-        <Button variant="gradient" size="sm" onClick={() => setModalOpen(true)} className="gap-1.5">
+        <Button variant="gradient" size="sm" onClick={() => { setForm({ id: '', title: '', content: '', priority: 'General' }); setModalOpen(true); }} className="gap-1.5">
           <Plus className="w-4 h-4" /> Post Notice
         </Button>
       </div>
@@ -152,7 +167,7 @@ export default function AdminAnnouncementsPage() {
       />
 
       {/* Post Modal */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Broadcast Campus Announcement">
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={form.id ? "Edit Announcement" : "Broadcast Campus Announcement"}>
         <form onSubmit={handlePost} className="space-y-4">
           <div>
             <label className="text-xs font-semibold text-gray-500 mb-1 block">Title</label>
@@ -174,6 +189,10 @@ export default function AdminAnnouncementsPage() {
             >
               <option value="General">General Notice</option>
               <option value="Urgent">Urgent / Priority Alert</option>
+              <option value="Event">Event</option>
+              <option value="Achievement">Achievement</option>
+              <option value="Deadline">Deadline</option>
+              <option value="ClubHead">Club Head Specific</option>
             </select>
           </div>
 
@@ -192,7 +211,7 @@ export default function AdminAnnouncementsPage() {
               Cancel
             </Button>
             <Button variant="gradient" size="sm" type="submit" loading={saving}>
-              Broadcast Notice
+              {form.id ? 'Save Changes' : 'Broadcast Notice'}
             </Button>
           </div>
         </form>

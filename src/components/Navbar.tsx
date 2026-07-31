@@ -6,16 +6,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/lib/AuthContext';
 import { cn } from '@/lib/utils';
 import Avatar from '@/components/ui/Avatar';
+import NotificationBell from '@/components/NotificationBell';
 import NotificationCenter from '@/components/NotificationCenter';
 import {
   Menu, X, LogOut, LayoutDashboard, Users, Calendar, Megaphone,
-  Home, ChevronDown, Award
+  Home, ChevronDown, Award, Sparkles, Shield, Trophy
 } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Home', icon: Home },
   { href: '/clubs', label: 'Clubs', icon: Users },
+  { href: '/find-your-club', label: 'Find Club', icon: Sparkles },
   { href: '/events', label: 'Events', icon: Calendar },
+  { href: '/hackathons/today', label: 'Hackathons', icon: Trophy },
   { href: '/announcements', label: 'Notices', icon: Megaphone },
   { href: '/leaderboard', label: 'Leaderboard', icon: Award },
   { href: '/calendar', label: 'Calendar', icon: Calendar },
@@ -119,21 +122,21 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-4 sm:top-5 z-50 mx-auto w-full px-4 sm:px-6 lg:px-8 max-w-7xl">
-      <nav
-        className={cn(
-          'rounded-[20px] border border-white/80 transition-all duration-300 ease-in-out dark:border-slate-800/80',
-          isScrolled
-            ? 'shadow-[0_12px_40px_rgba(0,0,0,0.12)] backdrop-blur-[16px] bg-white/90 dark:bg-slate-900/90 py-2.5'
-            : 'shadow-[0_8px_32px_rgba(0,0,0,0.08)] backdrop-blur-[12px] bg-white/85 dark:bg-slate-900/85 py-4'
-        )}
-      >
-        <div className="px-4 sm:px-6">
+    <header 
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300 ease-in-out",
+        isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200 dark:bg-slate-900/95 dark:border-slate-800 py-2.5"
+          : "bg-white/95 backdrop-blur-md border-b border-transparent dark:bg-slate-900/95 py-4"
+      )}
+    >
+      <nav className="mx-auto w-full max-w-7xl">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex h-12 items-center justify-between">
             {/* Logo + Tagline */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#2563EB] text-white font-black text-xs shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
-                BEC
+              <div className="flex h-10 w-10 items-center justify-center rounded-full overflow-hidden bg-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
+                <img src="/images/bec-logo.jpeg" alt="BEC Logo" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
                 <span className="text-base font-bold text-[#1E293B] dark:text-white leading-none tracking-tight">
@@ -221,9 +224,9 @@ export default function Navbar() {
 
             {/* Right Side: Auth / Profile */}
             <div className="flex items-center gap-3">
+              <NotificationBell />
               {user ? (
                 <>
-                  <NotificationCenter />
                   <Link href={getDashboardHref()}>
                     <button className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-[#2563EB] bg-[#EFF6FF] border border-blue-200/80 hover:bg-blue-100 transition-all duration-200 ease-in-out dark:bg-blue-950/60 dark:text-blue-300 dark:border-blue-800">
                       <LayoutDashboard className="w-4 h-4 text-[#2563EB]" />
@@ -284,7 +287,7 @@ export default function Navbar() {
                               className="flex items-center gap-2.5 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition-all duration-200 dark:hover:bg-slate-800"
                               onClick={() => setProfileOpen(false)}
                             >
-                              <ShieldCheck className="w-4 h-4" />
+                              <Shield className="w-4 h-4" />
                               Admin Panel
                             </Link>
                           )}

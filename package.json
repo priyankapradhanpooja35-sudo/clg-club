@@ -10,10 +10,12 @@
     "seed": "node seed.js"
   },
   "dependencies": {
+    "@types/html2canvas": "^0.5.35",
     "bcryptjs": "^3.0.3",
     "canvas-confetti": "^1.9.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.43.0",
+    "html2canvas": "^1.4.1",
     "html5-qrcode": "^2.3.8",
     "jsonwebtoken": "^9.0.3",
     "jspdf": "^4.2.1",

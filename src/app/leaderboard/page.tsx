@@ -1,128 +1,94 @@
 'use client';
-import { useEffect, useState } from 'react';
+
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import { Card, CardContent } from '@/components/ui/Card';
-import Avatar from '@/components/ui/Avatar';
-import Badge from '@/components/ui/Badge';
-import { CardSkeleton } from '@/components/ui/Skeleton';
-import EmptyState from '@/components/ui/EmptyState';
-import { Trophy, Award, Zap, Star, Flame, Sparkles } from 'lucide-react';
+import LeaderboardTable from '@/components/LeaderboardTable';
+import DailyCoderCard from '@/components/DailyCoderCard';
+import HackathonPodium from '@/components/HackathonPodium';
+import { Trophy, Code2, Flame } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LeaderboardPage() {
-  const [users, setUsers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/leaderboard')
-      .then((r) => r.json())
-      .then((d) => {
-        setUsers(d.data || []);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
-
-  const getRankBadge = (rank: number) => {
-    if (rank === 1) return <span className="text-2xl">🥇</span>;
-    if (rank === 2) return <span className="text-2xl">🥈</span>;
-    if (rank === 3) return <span className="text-2xl">🥉</span>;
-    return <span className="text-sm font-black text-gray-400">#{rank}</span>;
-  };
+  const [activeTab, setActiveTab] = useState<'leaderboard' | 'coder-of-day' | 'hackathon-podium'>('leaderboard');
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-[var(--background)]">
-        {/* Hero */}
-        <div className="bg-gradient-to-br from-[#1E1B4B] via-[#4C1D95] to-[#1E293B] py-16 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/80 mb-4">
-              <Trophy className="w-3.5 h-3.5 text-amber-400" /> BEC Gamification
-            </span>
-            <h1 className="text-4xl sm:text-5xl font-black text-white mb-4">Campus Leaderboard</h1>
-            <p className="text-white/70 text-lg max-w-xl mx-auto">
-              Top active students earning engagement points through event participation and club contributions.
-            </p>
+      <div className="min-h-screen bg-slate-50/50 text-slate-900 pb-20">
+        {/* Clean Dashboard Header */}
+        <div className="bg-white border-b border-slate-200 py-10 px-4 mb-8">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-wider text-purple-700 block mb-1">
+                BEC Club Hub Analytics
+              </span>
+              <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+                Student Engagement Leaderboard
+              </h1>
+              <p className="text-sm text-slate-500 mt-1">
+                Institutional activity metrics, daily coder achievements, and hackathon results.
+              </p>
+            </div>
+
+            {/* Plain Outlined Navigation Tabs */}
+            <div className="inline-flex items-center gap-1.5 p-1 bg-slate-100/80 rounded-lg border border-slate-200/80 self-start md:self-auto">
+              <button
+                onClick={() => setActiveTab('leaderboard')}
+                className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                  activeTab === 'leaderboard'
+                    ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <Trophy className="w-3.5 h-3.5 text-purple-600" />
+                <span>Leaderboard</span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('coder-of-day')}
+                className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                  activeTab === 'coder-of-day'
+                    ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <Code2 className="w-3.5 h-3.5 text-purple-600" />
+                <span>Coder of the Day</span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('hackathon-podium')}
+                className={`px-3.5 py-1.5 rounded-md text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                  activeTab === 'hackathon-podium'
+                    ? 'bg-white text-slate-900 shadow-sm border border-slate-200'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                }`}
+              >
+                <Flame className="w-3.5 h-3.5 text-purple-600" />
+                <span>Hackathon Podium</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-4 py-12">
-          {loading ? (
-            <div className="space-y-3">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <CardSkeleton key={i} />
-              ))}
-            </div>
-          ) : users.length === 0 ? (
-            <EmptyState icon={Trophy} title="No activity recorded yet" description="Attend events to earn points!" />
-          ) : (
-            <div className="space-y-3">
-              {users.map((user, i) => {
-                const rank = i + 1;
-                const isTop3 = rank <= 3;
-                return (
-                  <motion.div
-                    key={user._id}
-                    initial={{ opacity: 0, x: -15 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                  >
-                    <Card
-                      className={`transition-all duration-200 ${
-                        isTop3 ? 'border-amber-400/40 bg-gradient-to-r from-amber-500/5 via-violet-500/5 to-transparent' : ''
-                      }`}
-                    >
-                      <CardContent className="py-4 px-5">
-                        <div className="flex items-center gap-4 flex-wrap sm:flex-nowrap">
-                          {/* Rank */}
-                          <div className="w-10 text-center shrink-0">{getRankBadge(rank)}</div>
+        {/* Content Section */}
+        <div className="max-w-4xl mx-auto px-4">
+          {activeTab === 'leaderboard' && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
+              <LeaderboardTable />
+            </motion.div>
+          )}
 
-                          {/* Avatar */}
-                          <Avatar name={user.name} size="md" />
+          {activeTab === 'coder-of-day' && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
+              <DailyCoderCard />
+            </motion.div>
+          )}
 
-                          {/* User Info */}
-                          <div className="flex-1 min-w-48">
-                            <div className="flex items-center gap-2">
-                              <h3 className="font-bold text-[var(--foreground)] text-base">{user.name}</h3>
-                              {user.role === 'ClubHead' && <Badge variant="warning">Club Head</Badge>}
-                            </div>
-                            <p className="text-xs text-gray-400">{user.email}</p>
-
-                            {/* Badges Pill Row */}
-                            {user.badges && user.badges.length > 0 && (
-                              <div className="flex flex-wrap gap-1.5 mt-2">
-                                {user.badges.map((b: any) => (
-                                  <span
-                                    key={b.id}
-                                    title={b.description}
-                                    className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium ${b.color}`}
-                                  >
-                                    <span>{b.icon}</span>
-                                    <span>{b.name}</span>
-                                  </span>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Engagement Score */}
-                          <div className="text-right shrink-0">
-                            <div className="flex items-center justify-end gap-1.5">
-                              <Zap className="w-4 h-4 text-amber-500 fill-amber-500" />
-                              <span className="text-xl font-black text-[var(--foreground)]">
-                                {user.engagementScore || 0}
-                              </span>
-                            </div>
-                            <p className="text-[11px] text-gray-400">pts</p>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
+          {activeTab === 'hackathon-podium' && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
+              <HackathonPodium />
+            </motion.div>
           )}
         </div>
       </div>

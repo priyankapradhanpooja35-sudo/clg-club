@@ -46,3 +46,26 @@ export async function DELETE(req: NextRequest) {
     return errorResponse('Internal server error', 500);
   }
 }
+
+export async function PUT(req: NextRequest) {
+  try {
+    const token = getTokenFromRequest(req);
+    const payload = token ? verifyToken(token) : null;
+    if (!payload || !['Admin', 'ClubHead', 'Faculty'].includes(payload.role)) {
+      return errorResponse('Forbidden', 403);
+    }
+    await dbConnect();
+    const body = await req.json();
+    const { id, title, content, priority } = body;
+    if (!id || !title || !content) return errorResponse('id, title, and content are required');
+    const ann = await Announcement.findByIdAndUpdate(
+      id,
+      { title, content, priority: priority || 'General' },
+      { new: true }
+    );
+    if (!ann) return errorResponse('Announcement not found', 404);
+    return successResponse(ann, 'Announcement updated', 200);
+  } catch (err) {
+    return errorResponse('Internal server error', 500);
+  }
+}

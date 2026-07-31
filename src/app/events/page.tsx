@@ -79,10 +79,10 @@ export default function EventsPage() {
         <div className="max-w-7xl mx-auto px-4 py-10">
           {/* Filter chips */}
           {!loading && clubs.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-8">
+            <div className="flex gap-3 mb-8 overflow-x-auto pb-4 scrollbar-hide snap-x mask-fade-edges">
               <button
                 onClick={() => setFilter('all')}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${filter === 'all' ? 'bg-violet-600 text-white shadow-md' : 'bg-[var(--muted)] text-gray-500 hover:text-[var(--foreground)]'}`}
+                className={`px-5 py-2 rounded-full text-sm font-semibold transition-all whitespace-nowrap snap-start shrink-0 ${filter === 'all' ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-[0_0_15px_rgba(99,102,241,0.4)]' : 'bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 shadow-sm'}`}
               >
                 All Events
               </button>
@@ -92,7 +92,7 @@ export default function EventsPage() {
                   <button
                     key={slug}
                     onClick={() => setFilter(slug)}
-                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${filter === slug ? 'bg-violet-600 text-white shadow-md' : 'bg-[var(--muted)] text-gray-500 hover:text-[var(--foreground)]'}`}
+                    className={`px-5 py-2 rounded-full text-sm font-semibold transition-all whitespace-nowrap snap-start shrink-0 ${filter === slug ? 'bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-[0_0_15px_rgba(99,102,241,0.4)]' : 'bg-slate-100/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-700 shadow-sm'}`}
                   >
                     {c?.name || slug}
                   </button>
@@ -134,9 +134,8 @@ export default function EventsPage() {
                           <span className="flex items-center gap-1 truncate"><MapPin className="w-3.5 h-3.5 shrink-0" /> {ev.venue}</span>
                         </div>
                         <Button
-                          variant="gradient"
+                          className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-400 hover:to-indigo-500 text-white font-bold shadow-[0_4px_20px_-4px_rgba(59,130,246,0.4)] hover:shadow-[0_8px_25px_-5px_rgba(59,130,246,0.6)] transition-all duration-300 border-0"
                           size="sm"
-                          className="w-full"
                           loading={registering === ev._id}
                           onClick={() => handleRegister(ev._id)}
                           disabled={!upcoming}
